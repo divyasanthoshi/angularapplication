@@ -1,0 +1,17 @@
+@import '../config';
+
+::ng-deep ion-alert{
+    --max-width:600px !important;
+    --min-width:300px !important;
+    --width:40% !important;
+    
+    .alert-message{
+      font-weight:400 !important;
+      font-size: 0.9em !important;
+    }
+    .alert-title{
+      font-size:15px !important;
+    }
+
+    
+}

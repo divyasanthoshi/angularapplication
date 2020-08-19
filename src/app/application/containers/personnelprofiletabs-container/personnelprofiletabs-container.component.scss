@@ -1,0 +1,26 @@
+ion-tab-bar{
+    overflow-x: scroll;
+    scrollbar-width: none; 
+     -ms-overflow-style: none;  
+    // justify-content: left;
+}
+
+// .ion-tab-bar ::-webkit-scrollbar { /* WebKit */
+//     scrollbar-width: none !important;
+//   }
+
+   .hide-native-scrollbar {
+    scrollbar-width: none; /* Firefox 64 */
+    -ms-overflow-style: none; /* Internet Explorer 11 */
+    &::-webkit-scrollbar { /** WebKit */
+      display: none;
+    }
+  }
+
+//   ion-label{
+//       background-color: lightblue;
+//       border-radius: 20px;
+//       padding:10px;
+
+
+//   }

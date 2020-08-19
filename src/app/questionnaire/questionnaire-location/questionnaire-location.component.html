@@ -1,0 +1,22 @@
+<ion-card class="ion-text-center">
+  <ion-card-header>
+    <ion-card-title @slideInOut *ngIf="isShow">ZIP Code</ion-card-title>
+    <ion-card-subtitle>Enter the ZIP Code where you application to do business</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content @fadeInOut *ngIf="isShow">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3"></ion-col>
+        <ion-col size="6">
+          <ion-item [formGroup]="locationForm">
+            <ion-label position="floating">ZIP Code</ion-label>
+            <ion-input formControlName="zipCode" inputmode="decimal"
+              [value]="zipcode" appFormControlValidationMsg validationMsgId='zipCode'
+              minlength="5" maxlength="5"></ion-input>    
+          </ion-item>
+        </ion-col>
+        <ion-col size="3"></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

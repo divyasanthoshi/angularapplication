@@ -1,0 +1,6 @@
+<app-tabs-header [pageTitle]="selectedTabs"></app-tabs-header>
+<ion-content>
+    <app-tabs-menu class="ion-hide-sm-down"></app-tabs-menu>
+</ion-content>
+<app-tabs-options (selectedTab)="selectTab($event)" class="ion-hide-md-up"></app-tabs-options>
+

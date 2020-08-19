@@ -1,0 +1,11 @@
+<app-application-viewpersonnel 
+  [currentViewPersonnel]="currentPersonnel$ | async"
+  [applicationLookup]="applicationLookup$ | async">
+
+</app-application-viewpersonnel>
+
+<ion-fab vertical="bottom" horizontal="end" class="ion-hide-md-up ion-padding" class="fabbutton-fixed">
+  <ion-fab-button (click)="editPersonnel()">
+    <ion-icon name="pencil"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

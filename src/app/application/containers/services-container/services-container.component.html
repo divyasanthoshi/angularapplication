@@ -1,0 +1,25 @@
+<app-application-services
+[servicesLookups] = "servicesLookups$ | async" 
+[providerId] ="providerId"
+[services] = "services$ | async" 
+(create)="createServices($event)" 
+(update)="updateServices($event)"></app-application-services>
+
+<ion-grid fixed  class="btn-align">
+    <ion-row>
+        <ion-col size-xs="6" size-md="3" offset-md="3">
+            <ion-button fill="outline" expand="block" [routerLink]="previousUrl" queryParamsHandling="preserve">
+                Back
+            </ion-button>
+        </ion-col>
+        <ion-col  size-xs="6" size-md="3">
+            <ion-button expand="block" id="nextbutton" (click)="nextPage()">
+                Next: Ownership
+                <span>
+                    <ion-icon name="caret-forward"></ion-icon>
+                </span>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+

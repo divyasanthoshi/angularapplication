@@ -1,0 +1,11 @@
+.in-segment img {
+  filter: invert(57%) sepia(0%) saturate(1380%) hue-rotate(200deg) brightness(88%) contrast(86%);
+}
+
+.in-segment img.selected {
+  filter: invert(100%) sepia(0%) saturate(7488%) hue-rotate(183deg) brightness(98%) contrast(99%);
+}
+
+.in-segment ion-label{
+  margin-top:6px;
+}

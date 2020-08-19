@@ -1,0 +1,26 @@
+@import '../../../../../stylesheet/config';
+
+.attachmentslist-lottieheight{
+    max-height: 500px;
+    min-height: 380px;
+}
+
+.attachmentslist-addfilefont{
+    font-size: 2em;
+}
+.attachmentslist-helpertext{
+    font-size:1.1em;
+}
+.attachmentslist-labelmargin{
+    margin-top:-110px
+}
+
+.attachmentslist-errormsg{
+    padding-top: 10px;
+    padding-bottom:10px;
+    background:darken($ion-color-primary-contrast,10%);
+}
+.attachmentlist-input{
+    position: absolute;
+    opacity: 0; 
+}

@@ -1,0 +1,36 @@
+@import '../config';
+
+::ng-deep ion-list.ion-list-categorized{
+    ion-item-divider{
+        border:none;
+        font-weight: 500;
+    }
+    
+    ion-item-sliding{
+        ion-label{
+            margin-left:25px;
+            h3{
+                font-size: large;
+                color: var(--ion-color-primary);
+                font-weight: 500;
+            }
+            p{
+                font-size: small;
+            }
+        }
+    
+        ion-avatar{
+            font-size: 2.7em;
+            color:var(--ion-color-primary-shade);
+        }
+    }
+    
+    ion-item{
+        &.selected{
+            ion-avatar{
+                color: var(--ion-color-primary);
+            }
+        }
+    }
+    
+}

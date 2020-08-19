@@ -1,0 +1,17 @@
+<ion-grid fixed class="ion-grid-border ion-hide-sm-down" >
+  <ion-row>
+    <ion-col>
+      <app-application-submitted [submittedForm]="submittedForm$ | async">
+      </app-application-submitted>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid class="ion-hide-sm-up submitted-sm-background">
+  <ion-row>
+    <ion-col>
+      <app-application-submitted [submittedForm]="submittedForm$ | async">
+      </app-application-submitted>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,6 @@
+@import '../../../../stylesheet/config';
+
+.pagevalidation-errormsg{
+    padding:16px;
+    background:darken($ion-color-primary-contrast,10%);
+}

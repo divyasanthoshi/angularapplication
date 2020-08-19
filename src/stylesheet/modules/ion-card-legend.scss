@@ -1,0 +1,58 @@
+@import "../config";
+
+// a module that used to create a legend card for the whole page
+// example: questionnaire component
+$ion-card-legend-width: 300px;
+
+::ng-deep .ion-card-legend {
+    ion-card {
+        margin: auto;
+        padding: 10px 0px;
+        min-height: 480px;
+        background-color: white;
+        width: $ion-card-legend-width;
+    }
+    ion-card-title {
+        font-size: 2.4em;
+        font-weight: 400;
+        margin-top: 25px;
+    }
+    ion-card-subtitle {
+        font-weight: 400;
+        font-size: 1.0em;
+        margin-top: 3px;
+    }
+    // this class is used for legend icon in the card, example 'sickchildren'
+    .ion-card-icon-legend {
+        font-size: 5em;
+        height: 120px;
+        width: 120px;
+        display: inline;
+    }
+    ion-note{
+        font-size: 1.1em;
+        text-align:center;
+    }
+}
+
+// this class is used for card style that has button inside of the card
+::ng-deep .ion-card-legend.withbtn {
+    ion-card {
+        padding-bottom: 70px;
+    }
+
+    .ion-card-singlebtn,
+    .ion-card-twobtn {
+        margin-top: -97px;
+        ion-button {
+            display: inline-block;
+        }
+    }
+    .ion-card-singlebtn ion-button {
+        width: $ion-card-legend-width - 29px;
+    }
+
+    .ion-card-twobtn ion-button {
+        width: $ion-card-legend-width/2 - 23px;
+    }
+}

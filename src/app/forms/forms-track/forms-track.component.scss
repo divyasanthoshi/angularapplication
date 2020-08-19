@@ -1,0 +1,12 @@
+@import '../../../stylesheet/config';
+
+.forms-date{
+    font-size: 0.7rem;
+    display: block;
+}
+
+.selected{
+    --background: #F4F6FC;
+    // --background: darken($ion-color-secondary-shade, 15%);
+    // --background: var(--ion-color-secondary-shade);
+}

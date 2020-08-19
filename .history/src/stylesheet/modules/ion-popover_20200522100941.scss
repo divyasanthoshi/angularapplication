@@ -1,0 +1,13 @@
+@import '../config';
+
+::ng-deep ion-popover{
+    --width:35% !important;
+    // --max-width: 450px !important;
+    --min-width: 240px !important;
+    --backdrop-opacity: var(--ion-backdrop-opacity,0.4) !important;
+
+    .customstyles{
+        text-align: left;
+        padding:16px;
+    }
+}

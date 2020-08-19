@@ -1,0 +1,72 @@
+
+<ion-grid *ngIf="peopleList&&peopleList.length>0" class="ion-no-padding forall fullheight">
+  <ion-row class="ion-no-padding fullheight">
+    <ion-col>
+      <ion-searchbar inputmode="search" placeholder= "Search Person" class="ion-hide-sm-down ion-searchbar-input" [(ngModel)]="searchText"></ion-searchbar>
+      <ion-list class="fullheight ion-list-categorized">
+        <ng-container *ngFor="let peoples of peopleAlphaBetaList | peopleSearch : searchText; let i = index;">
+          <ion-item-divider *ngIf="peoples.length>0" color="lightbluegradience">
+            <ion-label>        
+                    {{peoples[0].firstName.slice(0,1)}}
+            </ion-label>
+          </ion-item-divider>
+          <ion-item-sliding *ngFor="let people of peoples">
+            <ion-item button="true" (click)="clickPeople($event, people.personId)" [class.selected]="people.personId === currentPersonnelId">
+              <ion-avatar>
+                <ion-icon name="person-circle-outline"></ion-icon>
+              </ion-avatar>
+              <ion-label>
+                <h3>{{people.firstName + ' '+ people.lastName | titlecase}}</h3>
+                <p>
+                  <ng-container *ngFor="let personTitle of people.personTitles ; let isLast=last">
+                        {{personTitle.personTitle}}{{isLast?'':', '}} 
+                    </ng-container>
+                </p>
+              </ion-label>
+              <ion-buttons slot="end" *ngIf="people.personId === currentPersonnelId">
+                <ion-button class="ion-hide-sm-down" (click)="clickEdit(people.personId)">
+                  <ion-icon slot="icon-only" name="pencil" size="small" color = "primary"></ion-icon>
+                </ion-button>
+                <ion-button class="ion-hide-sm-down" (click)="clickDelete(people.personId)">
+                  <ion-icon slot="icon-only" name="trash" color="danger" size="small"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+            <ion-item-options side="end" class="ion-hide-lg-up">
+              <ion-item-option (click)="clickEdit(people.personId)">
+                <ion-icon slot="icon-only" name="pencil" size="small"></ion-icon>
+              </ion-item-option>
+              <ion-item-option color="danger" (click)="clickDelete(people.personId)">
+                <ion-icon slot="icon-only" name="trash" size="small"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ng-container>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-grid *ngIf="!peopleList || peopleList.length === 0"
+  class=" fullheight ion-text-center peoplist-background">
+    <ion-row>
+    <ion-col size="12" class="peoplelist-lottieheight ion-padding-bottom">
+      <!-- <ion-img class="img-personavatar-emptypage" src="../../assets/images/incorporate1.svg"></ion-img> -->
+      <lottie-player autoplay  loop src="../../../assets/EmptyState_ManInPark.json">
+      </lottie-player>
+
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12" class="ion-padding-top">
+      <ion-label class="people-helpertext bold">There's nobody here</ion-label>
+        <ion-note>Set up the profile of owner(s) and director</ion-note>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <ion-button class="ion-margin-top" (click)="clickCreate()">
+        Add Profile
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,56 @@
+<ion-grid fixed class="ion-text-center">
+  <ion-row *ngIf="isSubmitted !== true" class="ion-margin ion-padding-horizontal">
+    <ion-col size="12">
+      <ion-text color="primary">
+        <h4 class="bold ">Submit Your Application</h4>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-margin ion-padding-horizontal">
+    <ion-col size="12">
+      <div class="img-overlap-container" @flyInLeftStaggerAnimation>
+        <div [ngClass]="{'align-img-legend' : (isSubmitted === true) }">
+          <div [@fadeOut]="isSubmitted === true">
+              <ion-img class="img-legend img-overlap-triple img-overlap-1" src="../../assets/images/text-document.svg" ></ion-img>
+          </div>
+          <div [@fadeOut]="isSubmitted === true">
+            <ion-img class="img-legend img-overlap-triple img-overlap-2" src="../../assets/images/text-document.svg" ></ion-img>
+          </div>
+          <div [@fadeOut]="isSubmitted === true">
+            <ion-img class="img-legend img-overlap-triple img-overlap-3" src="../../assets/images/text-document.svg" ></ion-img>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="isSubmitted !== true">
+    <ion-col size="12">
+      <div @flyUpAnimation>
+        <p class="note-large ion-padding-horizontal">
+          Your documents are ready for submission. Click the Submit button to finish.
+        </p>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid class="ion-text-center">
+  <ion-row *ngIf="isSubmitted === true">
+    <ion-col>
+        <div [@moveUpDownAnimation]="isSubmitted === true" >
+          <ion-icon name="arrow-up" class="icon-align" color="primary"></ion-icon>
+        </div>
+        <div  [@moveUpAnimation]="isSubmitted === true" (@moveUpAnimation.done)='captureDoneEvent($event)' class="img-overlap-container">
+            <ion-img name="document-outline" class="img-legend img-overlap-triple img-overlap-2 document-align" src="../../assets/images/text-document.svg" ></ion-img>
+            <ion-img  name="document-outline" class="img-legend img-overlap-triple img-overlap-2 document-align" src="../../assets/images/text-document.svg" ></ion-img>
+        </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-toolbar fixed slot="end" color="primary" *ngIf="isSubmitted === true"  class="footer-div">
+  <ion-progress-bar color="light" type="indeterminate" ></ion-progress-bar>
+  <ion-title class="ion-text-center">Submitting</ion-title>
+</ion-toolbar>

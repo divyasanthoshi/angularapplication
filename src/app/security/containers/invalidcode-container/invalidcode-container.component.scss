@@ -1,0 +1,11 @@
+ion-content{
+    --background:url('../../../../assets/images/LoginAbstractBackground.jpg') no-repeat left center / 60% 100%;
+}
+
+.login-container{
+    background-image: url('../../../../assets/images/LoginAbstractBackground-light.jpg');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: cover;
+    background-blend-mode: lighten;
+}

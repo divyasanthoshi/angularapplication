@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar color="indigogradience" class="fullheight">
+        <ion-icon name="arrow-back-outline" size="large" slot="start" (click)="dismiss()" 
+            class="ion-padding-start"></ion-icon>
+        <ion-title>{{title}}</ion-title>
+        <p>Select one or more titles that are applicable</p>
+    </ion-toolbar>
+</ion-header>
+
+<ion-grid fullscreen class="ion-no-margin scrollable">
+    <ion-row >
+        <ion-col>
+            <form [formGroup]="selectionForm">
+                <ion-item lines="full" formArrayName="checkBoxesList" 
+                    *ngFor="let item of checkBoxesList.controls;let i = index" (click)="openModal(i)" [detail]="lookups[i].childItems">
+                    <ion-label class="ion-text-wrap" color="primary">{{lookups[i].text}} <br>
+                        <ion-note  class="ion-text-wrap">{{lookups[i].description}}</ion-note>
+                    </ion-label>
+                    <ng-container *ngIf="lookups[i].isSingleSelect === false">
+                        <ion-checkbox slot="start" id="checkbox{{i}}" [formControlName]="i"></ion-checkbox>
+                    </ng-container>
+                    <!-- <ng-container *ngIf="lookups[i].childItems">
+                        <ion-icon name="chevron-forward-outline"></ion-icon>
+                    </ng-container> -->
+                </ion-item>
+                <ion-radio-group [formControl]="radioBox" *ngIf="singleSelect === true">
+                    <ion-item class="ion-no-margin ion-no-padding" *ngFor="let item of lookups;let i = index"
+                        (click)="openModal(i)">
+                        <ion-label class="ion-text-wrap" color="primary">{{lookups[i].text}} <br>
+                            <ion-note class="ion-text-wrap">{{lookups[i].description}}</ion-note>
+                        </ion-label>
+                        <ng-container *ngIf="item.isSingleSelect === true">
+                            <ion-radio [name]="item.text" slot="start" [value]="lookups[i].value">
+                            </ion-radio>
+                        </ng-container>
+                        <ng-container *ngIf="lookups[i].childItems">
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                        </ng-container>
+                    </ion-item>
+                </ion-radio-group>
+            </form>
+        </ion-col>
+    </ion-row>
+</ion-grid>

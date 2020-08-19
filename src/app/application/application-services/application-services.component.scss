@@ -1,0 +1,61 @@
+ion-list{
+    height:100%;
+}
+
+.custom-size{
+    width: 92px;
+    padding-top: 10px;
+    padding-right: 10px;
+    height: 70px;
+    margin-left: -8px;
+    // margin-right: 49px;
+}
+
+.services-lottie-img{
+    width:70px;
+    background-color:black;
+    clip-path: circle(40%);
+}
+.services-serviceId2{
+    width:70px;
+     background-color:lightskyblue;
+    clip-path: circle(40%);
+    //  margin-right:0px !important;
+}
+.services-serviceId9{
+    width:100px;
+    margin-left: -22px;
+}
+    //  background-color:lightskyblue;
+    //  border-radius:40px;
+    //   margin-right:20px !important;
+
+
+.services-serviceId5{
+    background-color:black;
+    clip-path: circle(40%);
+  
+    width:70px;
+}
+
+.font{
+    font-size:18px;
+}
+
+.description-font{
+    font-size: 14px;
+}
+
+ion-item{
+    --min-height:90px !important;
+}
+
+.services-sm-gridmargin{
+    margin-left: 70px;
+    // margin-right: -75px;
+}
+
+.fixed-height{
+    position:absolute;
+    height:90px;
+}

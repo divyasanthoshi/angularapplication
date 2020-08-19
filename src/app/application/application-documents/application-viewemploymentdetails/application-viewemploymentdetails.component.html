@@ -1,0 +1,209 @@
+<ion-grid fixed>
+  <ion-row>
+    <ion-col>
+      <ion-card class="ion-no-margin emdetailsview-cardmargin-bottom">
+        <ion-row>
+          <ion-col class="ion-no-padding">
+            <ion-item color="primary">
+              <ion-label> {{currentViewEmploymentDetail?.personName}} -
+                {{currentViewEmploymentDetail?.startDate | date: 'MMMM yyyy' }} -
+                {{ currentViewEmploymentDetail?.endDate | date: 'MMMM yyyy' }}</ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xs="12">
+            <ul>
+              <li>
+                <h2 class="title">Employment Status</h2>
+              </li>
+              <li class="emdetailsview-padding-left">
+                {{currentViewEmploymentDetail?.isEmployed ? ' Employed' : ' Unemployed'}}</li>
+            </ul>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xs="12">
+            <ul>
+              <li>
+                <h2 class="title">
+                  {{currentViewEmploymentDetail?.isEmployed ? 'Period of Employment': 'Period of Unemployment'}}</h2>
+              </li>
+              <li class="emdetailsview-padding-left"> {{currentViewEmploymentDetail?.startDate | date: 'MMMM yyyy'}} -
+                {{currentViewEmploymentDetail?.endDate | date: 'MMMM yyyy'}}</li>
+            </ul>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="currentViewEmploymentDetail?.isEmployed === true">
+    <ion-col size-md="6" size-xs="12">
+      <ion-card class="ion-no-margin emdetailsview-cardmargin-right emdetailsview-cardmargin-top">
+        <ion-row>
+          <ion-col size-xs="12">
+            <ul>
+              <li>
+                <h2 class="title">Employer Details</h2>
+              </li>
+              <li class="emdetailsview-padding-left">
+                <ion-label>Name of Employer</ion-label>
+              </li>
+              <li class="emdetailsview-padding-left"> {{currentViewEmploymentDetail?.employerName}}</li>
+            </ul>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xs="12">
+            <ul>
+              <li class="emdetailsview-padding-left">
+                <ion-label>Position Held</ion-label>
+              </li>
+              <li class="emdetailsview-padding-left"> {{currentViewEmploymentDetail?.positionHeld}}</li>
+            </ul>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xs="12">
+            <ul>
+              <li>
+                <ion-text>Address</ion-text>
+              </li>
+              <li class="emdetailsview-padding-left">Work</li>
+              <li class="emdetailsview-padding-left">{{currentViewEmploymentDetail?.employerStreetAddress}}</li>
+              <li class="emdetailsview-padding-left">
+                {{currentViewEmploymentDetail?.employerCity}},{{currentViewEmploymentDetail?.employerState}}
+                {{currentViewEmploymentDetail?.employerZipCode}}</li>
+            </ul>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xs="12">
+            <ul>
+              <li>
+                <ion-text>Phone</ion-text>
+              </li>
+              <li class="emdetailsview-padding-left">
+                <ion-label>Work</ion-label>
+              </li>
+              <li class="emdetailsview-padding-left"> {{currentViewEmploymentDetail?.employerPhone}} Extn
+                {{currentViewEmploymentDetail?.employerPhoneExtn}}</li>
+            </ul>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xs="12">
+            <ul>
+              <li>
+                <ion-text>Email</ion-text>
+              </li>
+              <li class="emdetailsview-padding-left">
+                <ion-label>Work</ion-label>
+              </li>
+              <li class="emdetailsview-padding-left"> {{currentViewEmploymentDetail?.employerEmail}}</li>
+            </ul>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xs="12">
+            <ul>
+              <li>
+                <ion-text>Employer website</ion-text>
+              </li>
+              <li class="emdetailsview-padding-left">
+                {{currentViewEmploymentDetail?.employerWebsite  ? currentViewEmploymentDetail?.employerWebsite : 'None'}}
+              </li>
+            </ul>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+      <ion-row>
+        <ion-col size="12" class="ion-no-padding emdetailsview-padding-top">
+          <ion-card class="ion-no-margin emdetailsview-cardmargin-right">
+            <ion-row>
+              <ion-col size-xs="12">
+                <ul>
+                  <li>
+                    <h2 class="title">Supervisor Details</h2>
+                  </li>
+                  <li class="emdetailsview-padding-left">
+                    <ion-label>Name of Supervisor</ion-label>
+                  </li>
+                  <li class="emdetailsview-padding-left"> {{currentViewEmploymentDetail?.supervisorName}}</li>
+                </ul>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size-xs="12">
+                <ul>
+                  <li>
+                    <ion-text>Phone</ion-text>
+                  </li>
+                  <li class="emdetailsview-padding-left">
+                    <ion-label>Work</ion-label>
+                  </li>
+                  <li class="emdetailsview-padding-left"> {{currentViewEmploymentDetail?.supervisorPhone}} Extn
+                    {{currentViewEmploymentDetail?.supervisorPhoneExtn}}</li>
+                </ul>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size-xs="12">
+                <ul>
+                  <li>
+                    <ion-text>Email</ion-text>
+                  </li>
+                  <li class="emdetailsview-padding-left">
+                    <ion-label>Work</ion-label>
+                  </li>
+                  <li class="emdetailsview-padding-left"> {{currentViewEmploymentDetail?.supervisorEmail}}</li>
+                </ul>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size-md="6" size-xs="12">
+      <ion-card class="fullheight ion-no-margin emdetailsview-cardmargin-top">
+        <ion-row>
+          <ion-col size-xs="12">
+            <ul>
+              <li>
+                <h2 class="title">Reason For Leaving</h2>
+              </li>
+              <li class="emdetailsview-padding-left">
+                <ion-label>Reason For Leaving</ion-label>
+              </li>
+              <li class="emdetailsview-padding-left"> {{currentViewEmploymentDetail?.reason}}</li>
+            </ul>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xs="12" *ngIf="currentViewEmploymentDetail?.reasonForSeveranceId === otherReasonForSeveranceId">
+            <ul>
+              <li class="emdetailsview-padding-left">
+                <ion-label>Other Reasons</ion-label>
+              </li>
+              <li class="emdetailsview-padding-left"> {{currentViewEmploymentDetail?.reasonForSeveranceDescription}}
+              </li>
+            </ul>
+          </ion-col>
+
+        </ion-row>
+        <ion-row>
+          <ion-col size-xs="12">
+            <ul>
+              <li class="emdetailsview-padding-left">
+                <ion-label>Job Duties</ion-label>
+              </li>
+              <li class="emdetailsview-padding-left">{{currentViewEmploymentDetail?.jobDuties}}</li>
+            </ul>
+          </ion-col>
+
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,36 @@
+<ion-grid fixed class="fullheight ion-no-padding">
+    <ion-row class="fullheight">
+        <ion-col size-md="4" class="ion-hide-md-down">
+                <app-shared-documents-people [formTypeId]="formTypeId" [documentsPeople]="peopleDocuments$ | async"
+                    (navigateToPeopleForm)="navigateToPeopleForm($event)">
+                </app-shared-documents-people>
+        </ion-col>
+        <ion-col size-xs="12" size-md="8"class="ion-no-padding">
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <app-shared-attachment [attachmentCount]="attachmentCount"></app-shared-attachment>
+                        <ion-note class="ion-padding-horizontal"><span class="bold agmc-helpertextoptional">Optional:</span>
+                            Attach documents that supplement Attestation of Good Moral Character </ion-note>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-padding-top">
+                    <ion-col>
+                        <app-application-viewattestation [agmcDetails]="agmcDetails$ | async" [personName]="personName"
+                        [provider]="provider$ |async" [attachmentCount]="attachmentCount"></app-application-viewattestation>
+                        <ion-row>
+                            <ion-col>
+                                <ion-fab vertical="bottom" horizontal="end" class="fabbutton-fixed">
+                                    <ion-fab-button (click)="navigateToEditPage()">
+                                        <ion-icon name="pencil"></ion-icon>
+                                    </ion-fab-button>
+                                </ion-fab>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-col>
+    </ion-row>
+</ion-grid>

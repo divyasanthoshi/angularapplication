@@ -1,0 +1,24 @@
+<ion-grid class="iconoptions">
+    <ion-row>
+      <ion-col *ngFor="let item of listItems" [size]="12/elementPerline">
+          <ion-grid nopadding (click)="onClick(item.value)">
+            <ion-row>
+                <ion-col size="12">
+                  <!--icon from font awesome-->
+                  <ng-container *ngIf="item.iconName.indexOf('fa') > -1">
+                    <fa-icon [attr.name]="item.iconName" [icon]="['fas', trimIconName(item.iconName)]" class="icon-round fontawesome-icon fa-ajust" [ngClass]="{'selected': item.selected}"></fa-icon>
+                  </ng-container>
+                  <!--icon from ionic icons-->
+                  <ng-container *ngIf="item.iconName.indexOf('fa') === -1">
+                    <ion-icon [name]="item.iconName" class="icon-round icon-resize" [ngClass]="{'selected': item.selected}">
+                    </ion-icon>
+                  </ng-container>
+                    <div>
+                      <ion-label class="icon-label">{{item.text}}</ion-label>
+                    </div> 
+                </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+    </ion-row>
+  </ion-grid>

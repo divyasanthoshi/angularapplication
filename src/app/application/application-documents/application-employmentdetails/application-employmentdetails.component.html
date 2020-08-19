@@ -1,0 +1,369 @@
+<form [formGroup]="employmentDetailsForm" *ngIf="employmentDetailsForm" novalidate>
+<ion-grid fixed>
+
+  <ion-row name="employmentdetails-status" id="employmentdetails-status">
+    <ion-col>
+      <ion-card class="ion-no-margin empdetails-emstatuscard">
+        <ion-item>
+          <ion-grid>
+             <ion-row class="ion-card-customspacing">
+              <ion-col size="12">
+                <ion-item lines="none" class="ion-no-margin">
+                  <h2>Employment Status</h2>
+                </ion-item>
+              </ion-col>
+              </ion-row>
+              <ion-row class="ion-card-customspacing">  
+              <ion-col size-xs="12" size-md="6" size-lg="6">
+                <div class="ion-no-margin ion-padding-horizontal">
+                  <input type="hidden" formControlName="formId"/>
+                  <input type="hidden" formControlName="personId" />
+                
+                  <input type="hidden" formControlName="personName"/>
+                  <input type="hidden" formControlName="formSignedByPersonId"/>
+                  <input type="hidden" formControlName="reason"/>
+                  <input type="hidden" formControlName="formStatusId"/>
+                  <input type="hidden" formControlName="formStatus"/>
+                  <input type="hidden" formControlName="employmentHistoryAttachmentCount"/>
+                  <input type="hidden" formControlName="employmentHistoryAttachmentCount"/>               
+                  <input type="hidden" formControlName="employmentHistoryByApplicantId"/>
+                  
+                  <ion-segment mode="ios" (ionChange)="toggle_value($event)" [value]="isEmployed" formControlName="isEmployed">  
+                    <ion-segment-button mode="ios" [value]="true" [ngClass]="{'selected': isEmployed === true}">
+                      <ion-label class="customfont bold">
+                        {{options[0]}}
+                      </ion-label>
+                    </ion-segment-button>
+                    <ion-segment-button mode="ios" [value]="false" [ngClass]="{'selected': isEmployed === false}">
+                      <ion-label class="customfont bold">
+                        {{options[1]}}
+                      </ion-label>
+                    </ion-segment-button>
+                  </ion-segment>
+                </div>
+              </ion-col>
+            </ion-row> 
+            <ion-row class="ion-card-customspacing">
+              <ion-col size-xs="12">
+                <ion-item lines="none">
+                  <ion-label for="isCurrent">This is about my current employment</ion-label>
+                  <ion-checkbox #isCurrent class="employmentDetails-custom-margin" slot="start" name="isCurrent" formControlName="isCurrent"  ></ion-checkbox>
+                </ion-item> 
+              </ion-col>
+             
+              </ion-row>
+              <ion-row>
+                <ion-col size-xs="12" size-md="12">
+                  <ion-item lines="none" class="ion-no-margin">
+                    <h2> {{this.isEmployed ? 'Period of Employment' : 'Period of Unemployment'}}</h2>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            <ion-row class="ion-card-customspacing ion-padding">
+              <ion-col size ="6">
+                <ion-item class="ion-padding-end">
+                  <ion-label for="startDate" position="floating">Start Date</ion-label>
+                  <ion-datetime name="startDate" formControlName="startDate" displayFormat="MMM YYYY" appFormControlValidationMsg validationMsgId='startDate' ></ion-datetime>
+                  <ion-icon class="employmentDetails-custom-padding" color="primary" name="calendar-sharp"></ion-icon>
+                </ion-item>
+               
+              </ion-col>
+              <ion-col size ="6">
+               
+                <ion-item class="ion-padding-start">
+                  <ion-label for="endDate" position="floating">End Date</ion-label>
+                  <ion-datetime name="endDate" [min]="this.employmentDetailsForm.get('startDate').value"  formControlName="endDate" displayFormat="MMM YYYY" appFormControlValidationMsg validationMsgId='endDate' ></ion-datetime>
+                  <ion-icon  class="employmentDetails-custom-padding"  color="primary" name="calendar-sharp"></ion-icon>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="isEmployed && isEmployed === true && employmentDetail?.isEmployed !== false">
+        <ion-col size-lg="6" size-md="12" size-xs="12">
+      <ion-row name="employer-details" id="employer-details" >
+        <ion-col class="empdetails-paddingbottom">
+          <ion-card class="ion-no-margin empdetails-cardmargin-right empdetails-cardmargin-top">
+            <ion-item>
+              <ion-grid>
+                <ion-row class="ion-card-customspacing ion-padding">
+                  <ion-col size-xs="12" size-md="12" size-lg="12">
+                    <h2>Employer Details</h2>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="12" size-lg="12" class="ion-no-margin">
+                    <ion-item>
+                      <ion-label for="employerName" position="floating">Name of Employer</ion-label>
+                      <ion-input name="employerName"  inputmode="text" formControlName="employerName"  [value] = "employmentDetailsForm.get('employerName').value | titlecase" appFormControlValidationMsg validationMsgId='employerName'></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label for="positionHeld" position="floating">Position Held</ion-label>
+                      <ion-input name="positionHeld" inputmode="text" formControlName="positionHeld"  [value] = "employmentDetailsForm.get('positionHeld').value | titlecase" appFormControlValidationMsg validationMsgId='positionHeld'></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-card-customspacing ion-padding">
+                  <ion-col size-xs="12"  >
+                    <h2>Address</h2>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="12"  class="ion-no-margin">
+                    <ion-item  class="empdetails-no-innerpadding-end  empdetails-no-innerpadding-start">
+                      <ion-grid class="ion-no-padding forall" >
+                        <ion-row >
+                          <ion-col size-xs="4" size-md="2"  class="form-label-section">
+                            <ion-label>
+                              <span> Work</span>
+                            </ion-label>
+                          </ion-col>
+                          <ion-col size-xs="8" size-md="10"  class="ion-col-leftborder">
+                            <ion-item>
+                              <ion-label attr.for="streetAddress" position="floating">Address</ion-label>
+                              <ion-input name="streetAddress"  inputmode="text" formControlName="employerStreetAddress"  [value] = "employmentDetailsForm.get('employerStreetAddress').value | titlecase"  appFormControlValidationMsg validationMsgId='streetAddress'>
+                              </ion-input>
+                            </ion-item>
+                            <ion-item>
+                              <ion-label attr.for="city" position="floating">City</ion-label>
+                              <ion-input name="city"  inputmode="text" formControlName="employerCity" [value] = "employmentDetailsForm.get('employerCity').value | titlecase" appFormControlValidationMsg validationMsgId='city' ></ion-input>
+                            </ion-item>
+                              <ion-grid class="ion-no-padding forall">
+                                <ion-row>
+                                  <ion-col>
+                                    <ion-item>
+                                      <ion-label attr.for="state" position="floating">State</ion-label>
+                                      <ion-input name="state"  inputmode="text" formControlName="employerState" maxlength="2" [value] = "employmentDetailsForm.get('employerState').value | uppercase" appFormControlValidationMsg validationMsgId='state'  ></ion-input>
+                                    </ion-item>
+                                  </ion-col>
+                                  <ion-col>
+                                    <ion-item class="ion-item-leftborder">
+                                      <ion-label attr.for="zipCode" position="floating">Zip</ion-label>
+                                      <ion-input name="zipCode" inputmode="decimal"  minlength="5" maxlength="5"  inputmode="decimal" formControlName="employerZipCode" appFormControlValidationMsg validationMsgId='employerZipCode'  ></ion-input>
+                                    </ion-item>
+                                  </ion-col>
+                                </ion-row>
+                              </ion-grid>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-padding">
+                  <ion-col size-xs="12" size-md="12" >
+                    <h2>Phone</h2>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="12">
+                    <ion-item class="empdetails-no-innerpadding-end empdetails-no-innerpadding-start">
+                      <ion-grid   class="ion-no-padding forall">
+                        <ion-row>
+                          <ion-col size-xs="4" size-md="2" class="form-label-section">
+                            <ion-label>
+                              <span>Work</span>
+                            </ion-label>
+                          </ion-col>
+                          <ion-col  class="ion-col-leftborder">
+                            <ion-item>
+                              <ion-label attr.for="employerPhone" position="floating"> </ion-label>
+                              <ion-input name="employerPhone"  inputmode="tel"  maxlength="14" formControlName="employerPhone" minlength="14" maxlength="14" [appPhoneMask]="phoneMask" appFormControlValidationMsg validationMsgId='employerPhone'  >
+                              </ion-input>
+                            </ion-item>
+                          </ion-col>
+                          <ion-col size="2" class="ion-no-padding" >
+                            <ion-item class="ion-item-compact ion-item-leftborder" lines="none">
+                              <ion-label attr.for="phoneNumberExtension" position="floating">Ext</ion-label>
+                              <ion-input name="phoneNumberExtension"  maxlength="5"  formControlName="employerPhoneExtn" ></ion-input>
+                            </ion-item>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row class=" ion-card-customspacing ion-padding"> 
+                  <ion-col size-xs="12" size-md="2" >
+                    <h2>Email</h2>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="12" >
+                    <ion-item class="empdetails-no-innerpadding-end  empdetails-no-innerpadding-start" >
+                      <ion-grid  class="ion-no-padding forall">
+                        <ion-row>
+                          <ion-col size-xs="4" size-md="2" class="form-label-section">
+                            <ion-label attr.for="employerEmail">
+                              <span> Work</span>
+                            </ion-label>
+                          </ion-col>
+                          <ion-col size-xs="8" size-md="10" class="ion-col-leftborder">
+                            <ion-item>
+                              <ion-input name="employerEmail" inputmode="email" formControlName="employerEmail" appFormControlValidationMsg validationMsgId='employerEmail'></ion-input>
+                            </ion-item>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-card-customspacing ion-padding">
+                  <ion-col size-xs="12" size-md="12" >
+                    <h2>Employer Website<span class="fadetext">(Optional)</span></h2>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="12" >
+                    <ion-item>
+                      <ion-input name="website" inputmode="text" formControlName="employerWebsite"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-card>
+          </ion-col>
+      </ion-row>
+          <ion-row name="employer-details" id="employer-details" >
+            <ion-col>
+          <ion-card class="ion-no-margin empdetails-cardmargin-right">
+            <ion-item>
+              <ion-grid>
+                <ion-row class="ion-card-customspacing ion-padding">
+                  <ion-col size="12" >
+                    <h2>Supervisor Details</h2>
+                  </ion-col>
+                  <ion-col size="12" size class="ion-no-margin">
+                    <ion-item>
+                      <ion-label for="supervisor-name" position="floating">Name of Supervisor</ion-label>
+                      <ion-input name="supervisor-name"   inputmode="text" formControlName="supervisorName" appFormControlValidationMsg validationMsgId='supervisorName' [value] = "employmentDetailsForm.get('supervisorName').value | titlecase" ></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-padding">
+                  <ion-col size-xs="12" size-md="2">
+                    <h2>Phone</h2>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="12">
+                    <ion-item class="empdetails-no-innerpadding-end empdetails-no-innerpadding-start">
+                      <ion-grid   class="ion-no-padding forall">
+                        <ion-row>
+                          <ion-col size-xs="4" size-md="2" class="form-label-section">
+                            <ion-label>
+                              <span>Work</span>
+                            </ion-label>
+                          </ion-col>
+                          <ion-col  class="ion-col-leftborder">
+                            <ion-item>
+                              <ion-label attr.for="supervisorPhone" position="floating"> </ion-label>
+                              <ion-input name="supervisorPhone"  inputmode="tel"  maxlength="14"  formControlName="supervisorPhone" minlength="14" maxlength="14" [appPhoneMask]="phoneMask" appFormControlValidationMsg validationMsgId='supervisorPhone' >
+                              </ion-input>
+                            </ion-item>
+                          </ion-col>
+                          <ion-col size="2" class="ion-no-padding" >
+                            <ion-item class="ion-item-compact ion-item-leftborder" lines="none">
+                              <ion-label attr.for="phoneNumberExtension" position="floating">Ext</ion-label>
+                              <ion-input name="phoneNumberExtension"  maxlength="5" formControlName="supervisorPhoneExtn"></ion-input>
+                            </ion-item>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row class=" ion-card-customspacing ion-padding-horizontal ion-padding-top-small ion-padding-bottom-small"> 
+                  <ion-col size-xs="12" size-md="12">
+                    <h2>Email</h2>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="12">
+                    <ion-item class="empdetails-no-innerpadding-end  empdetails-no-innerpadding-start" >
+                      <ion-grid  class="ion-no-padding forall">
+                        <ion-row>
+                          <ion-col size-xs="4" size-md="2" class="form-label-section">
+                            <ion-label attr.for="supervisorEmail">
+                              <span> Work</span>
+                            </ion-label>
+                          </ion-col>
+                          <ion-col size-xs="8" size-md="10"  class="ion-col-leftborder">
+                            <ion-item>
+                              <ion-input name="supervisorEmail" inputmode="email" type="email" formControlName="supervisorEmail" appFormControlValidationMsg validationMsgId='supervisorEmail'  ></ion-input>
+                            </ion-item>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size-lg="6" size-md="12" size-xs="12">
+            <ion-row name="reason-for-leaving" id="reason-for-leaving" >
+        <ion-col>
+          <ion-card class="ion-no-margin empdetails-cardmargin-top">
+            <ion-item>
+              <ion-grid>
+                <ion-row class="ion-padding">
+                  <ion-col size-xs="12" size-md="12" size-lg="12">
+                    <h2>Reason for Leaving</h2>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="12"  class="ion-no-margin ion-padding-start">
+                    <ion-item>
+                      <ion-select #reasonforSeverance class="custom-width empdetails-no-innerpadding-start" multiple="false" formControlName="reasonForSeveranceId" appFormControlValidationMsg validationMsgId='reasonForSeveranceId' [interfaceOptions]="setActionSheetHeader()" interface="action-sheet">
+                      <ion-select-option *ngFor="let lookup of applicationLookups?.lookupReasonForSeverance" [value]="lookup.reasonForSeveranceId" > {{lookup.reason}}</ion-select-option> 
+                    </ion-select>
+                    </ion-item>
+                    
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="12" class="ion-padding-top ion-padding-start" >
+                    <ion-item lines="none" class="empdetails-jobdutiesborder">  
+                      <ion-textarea  placeholder="Other reasons" #reason  [disabled]="employmentDetailsForm?.get('reasonForSeveranceId').value !== applicationLookups?.lookupReasonForSeverance[7]?.reasonForSeveranceId"rows="5" formControlName="reasonForSeveranceDescription" [maxlength]=textareaMaxlength>
+                      </ion-textarea>
+                    </ion-item>
+                    <ion-note>{{this.employmentDetailsForm.get('reason').value ? textareaMaxlength - reason.value.length : textareaMaxlength}} characters remaining</ion-note>
+                  </ion-col>
+                  </ion-row>
+                  <ion-row class="ion-card-customspacing ion-padding-horizontal ">
+                    <ion-col size-xs="12" size-md="12">
+                      <h2>Job Duties</h2>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row  class="ion-card-customspacing ion-padding-start">
+                    <ion-col size-xs="12" size-md="12" class="ion-padding-horizontal">
+                    <ion-item lines="none" class="empdetails-jobdutiesborder" >
+                      <ion-textarea rows="27"   formControlName="jobDuties" #jobDuties [maxlength]=jobDutiesMaxlength appFormControlValidationMsg validationMsgId='jobDuties'> </ion-textarea>
+                    </ion-item>
+                    <ion-note>{{this.employmentDetailsForm.get('jobDuties').value ? jobDutiesMaxlength - jobDuties.value.length  : jobDutiesMaxlength}} characters remaining</ion-note>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-card-customspacing ion-padding-bottom ion-padding-horizontal">
+                  <ion-col class="ion-no-margin" size="12">
+                      <ion-item lines="inset">
+                        <ion-label for="name" position="floating">Full Name</ion-label>
+                        <ion-input name="name"  inputmode="text"  formControlName="formSignedBy" appFormControlValidationMsg validationMsgId='formSignedBy'></ion-input>
+                      </ion-item>
+                      <ion-item lines="none">
+                        <ion-label for="date" position="floating">Date</ion-label>
+                        <input hidden  formControlName="formSignedDate"/>
+                        <ion-input name="date" readonly  [value]="showCurrentDate"></ion-input>
+                      </ion-item>
+                      <ion-note class="empdetails-paddingbottom">By typing my name above,I am electronically
+                        signing my attestation
+                      </ion-note>
+                  </ion-col>
+                </ion-row>
+                <!-- <ion-row>
+                  <ion-col>
+                   
+                  </ion-col>
+                </ion-row> -->
+               
+              </ion-grid>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+    </ion-col>
+  </ion-row>
+
+</ion-grid>
+</form>
+

@@ -1,0 +1,29 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="dashboard" (click)="selectTab('dashboard')">
+      <ion-icon name="book"></ion-icon>
+      <ion-label>Dashboard</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="forms" (click)="selectTab('forms')">
+      <ion-icon name="paper"></ion-icon>
+      <ion-label>Forms</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="providers" (click)="selectTab('providers')">
+      <ion-icon name="contacts"></ion-icon>
+      <ion-label>Providers</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="notifications" (click)="selectTab('notifications')">
+      <ion-icon name="notifications"></ion-icon>
+      <ion-label>Notification</ion-label>
+      <ion-badge color="danger">6</ion-badge>
+    </ion-tab-button>
+
+    <ion-tab-button tab="settings" (click)="selectTab('settings')">
+        <ion-icon name="settings"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

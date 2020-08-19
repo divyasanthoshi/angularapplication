@@ -1,0 +1,32 @@
+<app-questionnaire-location 
+#zipcodeForm 
+[zipcodeList]="lookupZipcode$ | async" 
+(enteredZipcode)="storeZipcode($event)"
+[zipcode]="currentZipcode$ | async">
+</app-questionnaire-location>
+
+<ion-grid class="ion-card-twobtn">
+  <ion-row>
+      <ion-col class="ion-text-end">
+      <ion-button fill="outline" expand="block" [routerLink]="previousPageUrl" >
+          Back
+      </ion-button>
+      </ion-col>
+      <ion-col class="ion-text-start">
+      <ion-button expand="block" (click)="validateLocation()">
+          Next
+      </ion-button>
+      </ion-col>
+  </ion-row>
+</ion-grid>
+
+<!-- <div class="ion-card-twobtn ion-text-center">
+  <div style="float:left;">
+    <ion-button fill="outline" expand="block" [routerLink]="previousPageUrl" >
+      Back
+  </ion-button>
+  <ion-button expand="block" (click)="validateLocation()">
+    Next
+  </ion-button>
+  </div>
+</div> -->

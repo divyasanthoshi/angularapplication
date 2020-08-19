@@ -1,0 +1,52 @@
+<ion-grid fixed class="ion-no-padding forall fullheight">
+  <ion-row>
+    <ion-col>
+      <p class="ion-padding-horizontal">
+        The department is requiring providers to obtain approval from the local government entity,
+        HOA, and/or Landlord, or sign an attestation <b>acknowledging their responsibility for ensuring
+          compliance</b> with their local government entities, HOA, and/or Landlord.
+      </p>
+      <p class="ion-padding-horizontal">
+        Approval or attestation documents must be submitted as part of the application. The <b>approval
+          can be in the form of a letter on letterhead or an official form</b> from the local government
+        entity, HOA, and/or Landlord.
+      </p>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-no-padding">
+    <ion-col>
+      <ion-list lines="full">
+
+        <ng-container *ngFor="let item of zoningAttestationSourceList?.lookupZoningAttestationSource">
+          <ion-item *ngIf="item.description.trim()" id={{item?.zoningAttestationSourceId}}
+            (click)="navigateTo(item)"
+            button="true" class="ion-item-lines-padding">
+              <ion-icon name="alert-circle" color="primary" class="ion-icon-checkmark"
+              *ngIf="item?.zoningAttestationSourceId === zoningAttestationSourceList?.zoningAttestationDetail?.zoningAttestationSourceId &&
+              zoningAttestationSourceList?.zoningAttestationDetail?.formStatus === 'New'">
+              </ion-icon>
+              <ion-icon name="checkmark" color="success" class="ion-icon-checkmark"
+              *ngIf="item?.zoningAttestationSourceId === zoningAttestationSourceList?.zoningAttestationDetail?.zoningAttestationSourceId &&
+              zoningAttestationSourceList?.zoningAttestationDetail?.formStatus === 'Complete'">
+              </ion-icon>
+              <ion-icon name="alert-circle" color="danger" class="ion-icon-checkmark"
+              *ngIf="item?.zoningAttestationSourceId === zoningAttestationSourceList?.zoningAttestationDetail?.zoningAttestationSourceId &&
+              zoningAttestationSourceList?.zoningAttestationDetail?.formStatus === 'Expired'">
+              </ion-icon>
+              <ion-icon name="" color="success" class="ion-icon-checkmark"
+              *ngIf="item?.zoningAttestationSourceId !== zoningAttestationSourceList?.zoningAttestationDetail?.zoningAttestationSourceId">
+              </ion-icon>
+            <ion-label class="ion-text-wrap" color="primary">
+              {{item?.description}}
+            </ion-label>
+            <ion-icon name="chevron-forward-outline" class="ion-icon-chevron-forward"></ion-icon>
+          </ion-item>
+        </ng-container>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+  <ion-note class="note-align ion-padding-horizontal">
+    One of the above documents must be provided.
+  </ion-note>
+</ion-grid>

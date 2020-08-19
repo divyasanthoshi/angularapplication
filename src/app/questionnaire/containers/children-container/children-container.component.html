@@ -1,0 +1,20 @@
+<app-questionnaire-children
+[childrenRangeList]="lookupChildrenRange$ | async"
+(selectChildrenRange)="childrenRangeValue($event)" 
+[childrenRange]="currentChildrenRange$ | async">
+</app-questionnaire-children>
+  
+<ion-grid class="ion-card-twobtn">
+    <ion-row>
+        <ion-col class="ion-text-end">
+            <ion-button fill="outline" expand="block" [routerLink]="previousPageUrl" >
+                Back
+            </ion-button>
+        </ion-col>
+        <ion-col class="ion-text-start">
+            <ion-button expand="block"  (click)="nextPage()">
+                Next
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>

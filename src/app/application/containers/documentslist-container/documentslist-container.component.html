@@ -1,0 +1,26 @@
+<ion-grid fixed class="fullheight ion-no-padding">
+    <ion-row class="fullheight">
+        <ion-col class="ion-no-padding">
+            <app-application-documentslist [documentList]="documentsList$ | async" [showDocument] = "showDocument"
+                (navigateToPeopleList)="navigateToPeople($event)">
+            </app-application-documentslist>
+
+            <ion-grid fixed class="ion-margin-top" *ngIf="!showDocument">
+                <ion-row>
+                    <ion-col size-xs="6" size-md="3" offset-md="3">
+                        <ion-button fill="outline" expand="block" queryParamsHandling="preserve"
+                            (click)="previousPage()">
+                            Back
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size-xs="6" size-md="3">
+                        <ion-button expand="block" id="nextbutton" queryParamsHandling="preserve" (click)="nextPage()">
+                            Next: Summary
+                            <ion-icon slot="end" name="caret-forward"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-col>
+    </ion-row>
+</ion-grid>

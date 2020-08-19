@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Forms</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-grid class="ion-no-padding forall fullheight ">
+  <ion-row class="fullheight">
+    <ion-col size-xs="12" size-md="6" class="ion-col-rightborder fullheight">
+      <mat-tab-group headerPosition="above" [(selectedIndex)]="selectedIndex" mat-stretch-tabs class="fullheight " #tabGroup>
+        <mat-tab  label="TRACK">
+          <ng-template matTabContent>
+            <div class="ion-hide-sm-down">
+              <app-forms-track
+              [formLookups]="formLookups$ | async"
+              [trackForms]="trackForms$ | async"
+              [selectedForm]="currentForm$ | async"
+              [isArhivedForm]=false
+              (clickedForm)="clickedForm($event)"
+              (archive)="archive($event)">
+              </app-forms-track>
+            </div>
+            <div class="ion-hide-sm-up">
+              <app-forms-track
+              [formLookups]="formLookups$ | async"
+              [trackForms]="trackForms$ | async"
+              [selectedForm]="currentForm$ | async"
+              [isArhivedForm]=false
+              (clickedForm)="loadFormTrackDetail($event)"
+              (archive)="archive($event)">
+              </app-forms-track>
+            </div>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="ARCHIVE">
+          <ng-template matTabContent>
+            <div class="ion-hide-sm-down">
+              <app-forms-track
+              [formLookups]="formLookups$ | async"
+              [trackForms]="archivedForms$ | async"
+              [selectedForm]="currentForm$ | async"
+              [isArhivedForm]=true
+              (clickedForm)="clickedForm($event)">
+              </app-forms-track>
+            </div>
+            <div class="ion-hide-sm-up">
+              <app-forms-track
+              [formLookups]="formLookups$ | async"
+              [trackForms]="archivedForms$ | async"
+              [selectedForm]="currentForm$ | async"
+              [isArhivedForm]=true
+              (clickedForm)="loadFormTrackDetail($event)">
+              </app-forms-track>
+            </div>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </ion-col>
+    <ion-col class="ion-hide-sm-down fullheight scrollable" size-md="6">
+      <app-forms-trackingdetail
+      [form]="currentForm$ | async"
+      [formLookups]="formLookups$ | async"
+      (loadApplication) = "loadApplication($event)">
+      </app-forms-trackingdetail>
+    </ion-col>
+  </ion-row>
+</ion-grid>

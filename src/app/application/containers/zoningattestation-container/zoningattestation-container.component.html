@@ -1,0 +1,39 @@
+<ion-grid class="ion-no-padding">
+  <ion-row>
+      <ion-col>
+          <app-shared-attachment [attachmentCount]="(zoningAttestationSourceList$ | async)?.zoningAttestationDetail?.attachmentCount"></app-shared-attachment>
+      </ion-col>
+  </ion-row>
+
+  <ion-row>
+      <ion-col>
+          <app-application-zoningattestation [formItem]="formItem" [providerId]="currentProviderId$ | async"
+            [zoningAttestationSourceList]="zoningAttestationSourceList$ | async"
+            (navigateToAttestation)="navigateToAttestation($event)">
+          </app-application-zoningattestation>
+      </ion-col>
+  </ion-row>
+
+  <ion-grid fixed>
+    <ion-row  class="ion-margin-horizontal">
+      <ion-col class="ion-hide-md-down"></ion-col>
+      <ion-col class="ion-no-padding  ion-hide-md-down btn-align" size="6">
+        <ion-button  fill="outline" expand="block" (click)="cancel()" >
+          Back
+          <ion-icon slot="end"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col class="ion-hide-md-down"></ion-col>
+  
+  
+      <ion-col class="ion-no-padding  ion-hide-md-up" size-xs="12">
+        <ion-button fill="outline" class="btn-size" expand="block" (click)="cancel()">
+          Back
+          <ion-icon slot="end"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-grid>
+

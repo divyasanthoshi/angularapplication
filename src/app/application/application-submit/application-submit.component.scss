@@ -1,0 +1,69 @@
+$img-size: 14.5em;
+$img-leftoffset: 0.2em;
+$img-topoffset: 0.2em;
+$img-height: 55%;
+$img-width:55%;
+
+.img-legend{
+    font-size: $img-size;
+    height: $img-height;
+    width: $img-width;
+
+}
+.img-overlap-triple{
+    position: absolute;
+    display: inline-block;
+}
+.note-large{
+    font-size: 1.4em;
+    margin-top:-50px;
+    color:var(--ion-color-medium);
+    text-align:center;
+}
+
+.img-overlap-container{
+    position: relative; 
+    text-align: center;
+    height: 400px;
+    width: 320px;
+    display: inline-block;
+}
+
+.img-overlap-1{
+    left:0px;
+    top:$img-topoffset;
+}
+.img-overlap-2{
+    left:$img-leftoffset * 2;
+    top:0px;
+}
+.img-overlap-3{
+    left:$img-leftoffset;
+    top:$img-topoffset * 2;
+}
+
+
+.footer-div{
+    position:absolute;
+    top:600px;
+    height:400px;
+
+}
+
+.icon-align{
+    font-size: 5em;
+}
+.align-img-legend{
+    text-align: center;
+    position: absolute;
+    left: 20px;
+    top: 100px;
+}
+
+.document-align{
+    position: absolute;
+    top: -117px;
+    left: 80px;
+    font-size: 6em;
+
+}

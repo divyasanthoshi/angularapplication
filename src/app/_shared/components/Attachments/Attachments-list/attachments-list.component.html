@@ -1,0 +1,55 @@
+<div *ngIf="errorList && errorList.length">
+  <div class="attachmentslist-errormsg ion-padding-horizontal" *ngFor="let error of errorList">
+    <span class="ion-danger">{{error}}</span>
+  </div>
+</div>
+<ion-grid fixed>
+  <div *ngIf="showAttachmentList">
+    <ion-row>
+      <ion-col>
+        <ion-list lines="full" class="ion-padding-horizontal">
+          <ion-item *ngFor="let items of attachmentsList">
+            <ion-label color="primary">{{items.file.name}}<br>
+              <ion-note>{{items.description}}</ion-note>
+            </ion-label>
+            <ion-icon name="ellipsis-vertical-outline" (click)="menu($event)"></ion-icon>
+          </ion-item>
+        </ion-list>
+        <ion-fab vertical="bottom" horizontal="end" class="fabbutton-fixed">
+          <ion-fab-button for="file-input-icon">
+            <ion-icon name="add"></ion-icon>
+            <input type="file" (change)="loadImageFromDevice($event, 'selectFromIcon')"   #inputFile id="file-input-icon"
+              style="position: absolute;opacity: 0;"  [accept]="acceptedFilesTypes" >
+
+              <!-- <input name="file" id="file"(change)="upload($event)" type="file" #inputFile hidden> -->
+          </ion-fab-button>
+        </ion-fab>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-grid>
+
+
+<ion-grid class="ion-text-center" *ngIf="!showAttachmentList">
+  <ion-row>
+    <ion-col class="attachmentslist-lottieheight">
+      <lottie-player autoplay loop  src="../../../../../assets/attachfile.json"></lottie-player>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-padding-bottom attachmentslist-labelmargin ion-margin-bottom">
+    <ion-col size="12">
+      <ion-note class="bold attachmentslist-addfilefont ion-padding-bottom">Add files</ion-note><br>
+      <ion-note class="ion-text-center attachmentslist-helpertext">Attach the requested documents(s) from your computer
+      </ion-note>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12">
+      <ion-button for="file-input">Attach
+        <input type="file" (change)="loadImageFromDevice($event, 'selectFromBtn')" id="file-input"
+         class="attachmentlist-input" [accept]="acceptedFilesTypes">
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

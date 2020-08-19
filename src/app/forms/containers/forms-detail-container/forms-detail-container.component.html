@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-title class="ion-text-start ion-title-header">Tracking #
+        <p class="ion-title-subtitle ion-hide-sm-up"> {{(form$|async)?.trackingNumber}} </p>
+      </ion-title>
+      
+      <ion-buttons slot="start">
+          <ion-button routerLink="/forms">
+              <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<app-forms-trackingdetail
+    [form]="form$ | async"
+    [formLookups]="formLookups$ | async"
+    (loadApplication) = "loadApplication($event)">
+</app-forms-trackingdetail>

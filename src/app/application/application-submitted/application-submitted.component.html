@@ -1,0 +1,77 @@
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size="4"></ion-col>
+    <ion-col size="4"> 
+      <!-- <ion-icon class="icon-checkmark" name="checkmark-circle"></ion-icon> -->
+        <lottie-player autoplay  src="../../../assets/submit_greentick.json" ></lottie-player>
+    </ion-col>
+    <ion-col siz="4"></ion-col>
+  </ion-row>
+  <ion-row class="ion-text-center submitted-providertracking">
+    <ion-col>
+      <ion-note class="ion-text-center">
+        Thank you! Your application to become <br/>childcare provider has
+        been submitted.
+      </ion-note>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-text-center ion-padding-top">
+    <ion-col>
+      <ion-note class="ion-text-center">You may track the status<br> using the tracking number below</ion-note>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-text-center">
+    <ion-col>
+      <ion-text color="primary">
+        <h2 class="submitted-providertracking">{{submittedForm?.trackingNumber.toString() | slice:0:4}}-{{submittedForm?.trackingNumber.toString() | slice:4:8}}</h2>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-text>
+        <h1>Next Steps</h1>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="1">
+      <ion-icon name="ellipse" class="ion-icon-ellipse"></ion-icon>
+    </ion-col>
+    <ion-col>
+      <p>A licensing counselor will contact you, if there are any questions
+        regarding the answers that you provided on the application form.</p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="1">
+      <ion-icon name="ellipse" class="ion-icon-ellipse"></ion-icon>
+    </ion-col>
+    <ion-col>
+      <p>You will be sent an email with your OCA number and instructions on how
+        to do your background screening within the next 72 hours.</p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="1">
+      <ion-icon name="ellipse" class="ion-icon-ellipse"></ion-icon>
+    </ion-col>
+    <ion-col>
+      <p>If you did not receive an email from DCF or hear from a licensing counselor,
+        please contact the local licensing office by using the 'Support' button at the top of this page.</p>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-button color="primary" (click)="trackApplication()">Track Application</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+ 
+</ion-grid>

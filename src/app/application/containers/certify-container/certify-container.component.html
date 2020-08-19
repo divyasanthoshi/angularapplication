@@ -1,0 +1,19 @@
+<!-- back next buttons for navigation to next page from applicationcertify-->
+<ion-grid fixed class="ion-padding-horizontal fullheight">
+  <app-application-certify (isCertify)="certify($event)"></app-application-certify>
+</ion-grid>
+<ion-grid fixed class="ion-padding-horizontal">
+  <ion-row>
+    <ion-col size-xs="6" size-md="3" offset-md="3" class="ion-text-center">
+      <ion-button fill="outline" expand="block" (click)="previousPage()">
+        Back
+      </ion-button>
+    </ion-col>
+
+    <ion-col size-xs="6" size-md="3"  class="ion-text-center">
+      <ion-button expand="block" id="nextbutton" [disabled]="!isChecked" (click)="nextPage()">
+        Next
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

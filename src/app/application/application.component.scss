@@ -1,0 +1,32 @@
+// This style is used for overwriting the stepper style
+mat-horizontal-stepper{
+    height:80px;
+    margin-top: -20px;
+}
+.mat-stepper-horizontal{
+    background-color:transparent;
+}
+.mat-step-icon.mat-step-icon-selected{
+    border:2px solid white;
+    margin-top: -4px;
+    height:34px;
+    width:34px;
+}
+mat-step label{
+    color: white;
+}
+.mat-step-icon-state-edit{
+    color:var(--ion-color-primary);
+}
+.mat-step-icon-content{
+    color:white;
+}
+.mat-stepper-horizontal-line{
+    color:white;
+}
+.routeContainer{
+    position: relative;
+}
+.routeContainer>*{
+    display: block;
+}

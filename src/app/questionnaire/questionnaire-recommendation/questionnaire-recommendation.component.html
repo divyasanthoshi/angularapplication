@@ -1,0 +1,198 @@
+<ion-grid class="comparetable">
+    <ion-row>
+        <ion-col>
+            <ion-card class="overflow">
+                <ion-card-content *ngIf="show">
+                    <p>No records found</p>
+                </ion-card-content>
+
+                <ng-container *ngIf="!show">
+                    <ion-card-content
+                        [ngClass]="{'min-width-400': data.recommendList && data.recommendList.length > 1, 'min-width-1000':  data.recommendList &&  data.recommendList.length > 2}">
+                        <ion-grid>
+                            <ion-row *ngFor="let rowItem of data | keyvalue : returnZero; let rowIndex = index">
+                                <ng-container *ngIf="rowItem.key === 'recommendList'; else textContainer">
+                                    <ion-col class="border-table ion-padding" *ngFor="let colItem of rowItem.value">
+                                        <div *ngFor="let itemList of colItem | keyvalue">
+                                            <ion-segment mode="ios" class="ion-text-center"
+                                                *ngIf="itemList.value && columnKeys[itemList.key]">
+                                                <div *ngFor="let item of generateProgramtypeIconList(itemList.value)"
+                                                    class="iconoptions">
+                                                    <ng-container *ngIf="item.iconName.indexOf('fa') > -1">
+                                                        <fa-icon [attr.name]="item.iconName"
+                                                            [icon]="['fas', trimIconName(item.iconName)]"
+                                                            class="icon-round large fa-ajust"
+                                                            [ngClass]="{'selected': item.selected}"></fa-icon>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="item.iconName.indexOf('fa') === -1">
+                                                        <ion-icon [name]="item.iconName" class="icon-round large"
+                                                            [ngClass]="{'selected': item.selected}">
+                                                        </ion-icon>
+                                                    </ng-container>
+                                                    <div>
+                                                        <ion-label color="primary" class="bold">{{item.text}}
+                                                        </ion-label>
+                                                    </div>
+                                                </div>
+                                            </ion-segment>
+                                        </div>
+                                    </ion-col>
+                                </ng-container>
+                                <ng-template #textContainer>
+                                    <ng-container>
+                                        <ion-col class="noborder ion-padding"
+                                            *ngFor="let colItem of rowItem.value; let i = index;">
+                                            <ng-container *ngIf="colItem.isRecommended; else notRecommended">
+                                                <a class="bold">{{RowKeys[rowItem.key]}}</a>
+                                                <div class="list-align" *ngFor="let itemList of colItem | keyvalue">
+                                                    <ng-container
+                                                        *ngIf="itemList.value && columnKeys[itemList.key] && !isArray(itemList.value[itemList.key])">
+                                                        <ng-container *ngIf="isContainsLink(colItem[itemList.key])">
+                                                            <div
+                                                                [innerHTML]="linkText(itemList.value[itemList.key], colItem[itemList.key])">
+                                                            </div>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="!isContainsLink(colItem[itemList.key])">
+                                                            {{itemList.value[itemList.key]}}</ng-container>
+                                                    </ng-container>
+                                                    <ng-container
+                                                        *ngIf="itemList.value && columnKeys[itemList.key] && isArray(itemList.value[itemList.key])">
+                                                        <ng-container
+                                                            *ngIf="!isContainOptions(itemList.value[itemList.key]); else optionsContainer">
+                                                            <ul class="list-align">
+                                                                <ng-container
+                                                                    *ngFor="let item of itemList.value[itemList.key]">
+                                                                    <li *ngIf="item">
+                                                                        {{item}}
+                                                                    </li>
+                                                                </ng-container>
+                                                            </ul>
+                                                        </ng-container>
+                                                        <ng-template #optionsContainer>
+                                                            <ng-container
+                                                                *ngFor="let item of itemList.value[itemList.key]">
+                                                                <div *ngIf="item.text">
+                                                                    {{item.text}}
+                                                                    <ul *ngIf="item.options && item.options.length">
+                                                                        <li *ngFor="let option of item.options">
+                                                                            <ng-container *ngIf="option.text">
+                                                                                {{option.text}}
+                                                                            </ng-container>
+                                                                            <ng-container
+                                                                                *ngIf="option.options && option.options.length">
+                                                                                <div *ngIf="option.text">
+                                                                                    {{option.text}}
+                                                                                    <ul>
+                                                                                        <li
+                                                                                            *ngFor="let option of option.options">
+                                                                                            <ng-container
+                                                                                                *ngIf="option.text">
+                                                                                                {{option.text}}
+                                                                                            </ng-container>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </ng-container>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </ng-container>
+                                                        </ng-template>
+                                                    </ng-container>
+                                                </div>
+                                            </ng-container>
+                                            <ng-template #notRecommended>
+                                                <ng-container *ngIf="rowIndex === 1">
+                                                    {{colItem.recommendationDescription}}
+                                                </ng-container>
+                                            </ng-template>
+                                        </ion-col>
+                                    </ng-container>
+                                </ng-template>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="border-table ion-text-center ion-padding"
+                                    *ngFor="let dataItem of data.recommendList">
+                                    <ng-container *ngFor="let data of dataItem | keyvalue">
+                                        <ng-container *ngIf="data.value.isRecommended; else startOver">
+                                            <ion-button (click)="goToNext()">Apply now</ion-button>
+                                        </ng-container>
+                                        <ng-template #startOver>
+                                            <ion-button (click)="goToStart()">Start Over</ion-button>
+                                        </ng-template>
+                                    </ng-container>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-content>
+                    <ng-container *ngIf="_recommendList && _recommendList.length">
+                        <ion-grid class="ion-padding"
+                            *ngFor="let person of _recommendList[0].personContacts; let i = index;">
+                            <ng-container *ngIf="i === 0">
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-label>
+                                            For further details, please contact:<br>
+                                            <span><b>{{_recommendList[0].agencyName}}</b></span>
+                                        </ion-label>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col size-xs="12" size-md="4">
+                                        <span>
+                                            <ion-icon name="people" size="small" class="icon-position">
+                                            </ion-icon>
+                                        </span>
+                                        <ion-label class="label-position">{{person.name}}</ion-label>
+                                    </ion-col>
+                                    <ion-col class="details-align" size-xs="12" size-md="4">
+                                        <span>
+                                            <ion-icon name="pin" size="small" class="icon-position">
+                                            </ion-icon>
+                                        </span>
+                                        <ion-label class="label-position">{{person.address}}</ion-label>
+                                    </ion-col>
+                                    <ion-col class="details-align" size-xs="12" size-md="3">
+                                        <span>
+                                            <ion-icon name="mail" size="small" class="icon-position">
+                                            </ion-icon>
+                                        </span>
+                                        <ion-label class="label-position">{{person.email}}</ion-label>
+                                    </ion-col>
+                                    <ng-container *ngIf="person && person.personTitle; else counselor">
+                                        <ion-col size-xs="12" size-md="4">
+                                            <ion-label>{{person.personTitle}}</ion-label>
+                                        </ion-col>
+                                    </ng-container>
+                                    <ng-template #counselor>
+                                        <ion-col size-xs="12" size-md="4">
+                                            <ion-label>Counselor</ion-label>
+                                        </ion-col>
+                                    </ng-template>
+                                    <ion-col size-xs="12" size-md="4">
+                                        <span>
+                                            <ion-icon name="call" size="small" class="icon-position">
+                                            </ion-icon>
+                                        </span>
+                                        <ion-label *ngIf="person.phoneNumber">
+                                            ({{person.phoneNumber.toString() | slice:0:3}}){{person.phoneNumber.toString() | slice:3:6}}-{{person.phoneNumber.toString() | slice:6}}
+                                        </ion-label>
+                                    </ion-col>
+
+
+                                    <ion-col size-xs="12" size-md="4">
+                                        <span>
+                                            <ion-icon name="earth" size="small" class="icon-position">
+                                            </ion-icon>
+                                        </span>
+                                        <ion-label class="label-position">{{_recommendList[0].website}}</ion-label>
+                                    </ion-col>
+                                </ion-row>
+                            </ng-container>
+                        </ion-grid>
+                    </ng-container>
+                </ng-container>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</ion-grid>

@@ -1,0 +1,27 @@
+<div class="scrollable">
+
+<app-application-personnelprofile 
+    [personnel]="personnel$ | async" 
+    [providerId]="providerId$ | async"
+    [applicationLookups]="applicationLookups$ | async"
+    [personTitlePlusLookups] ="personTitlePlusLookups$ | async"
+    (creates)="createPersonnel($event)" 
+    (update)="updatePersonnel($event)">
+</app-application-personnelprofile>
+
+<ion-grid fixed class="ion-padding-horizontal">
+  <ion-row >
+    <ion-col size-xs="6" size-md="3" offset-md="3">
+      <ion-button fill="outline" expand="block" [routerLink]="previousUrl" queryParamsHandling = 'preserve'> 
+        Cancel
+      </ion-button>
+    </ion-col>
+    <ion-col size-xs="6" size-md="3" >
+      <ion-button expand="block" id="nextbutton" (click)="nextPage()">
+        Save
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</div>

@@ -1,0 +1,22 @@
+ion-header{
+    height:18%;
+}
+ion-title{
+    margin-top: 16px;
+    margin-left: -5px;
+    color:var(--ion-color-primary-contrast);
+}
+p{
+    color: white;
+    margin: 0 10px;
+    font-size: 0.9em;
+}
+ion-note{
+    padding-left:0px;
+    white-space: normal;
+}
+
+ion-item{
+    --padding-top: 5px;
+    --padding-bottom: 5px;
+}

@@ -1,0 +1,26 @@
+@import '../../../../stylesheet/config';
+
+.goodmoralC-radiobtn{
+    margin-top:2px;
+    margin-left:12px;
+    background: var(--ion-color-primary-contrast);
+    border-radius: 10px;
+}
+
+.goodmoralC-successlabel{
+    padding:10px 0px 5px 0px;
+    color: darken($ion-color-success-shade, 20%);
+}
+.goodmoralC-dangerlabel{
+    padding:10px 0px 5px 0px;
+    color:darken($ion-color-danger-tint,25%);
+}
+
+.goodmoralC-labelfont{
+    font-weight: 700;
+    font-size:0.9em;
+}
+
+.goodmoralC-itemmargin{
+    margin: 0px -16px;
+}

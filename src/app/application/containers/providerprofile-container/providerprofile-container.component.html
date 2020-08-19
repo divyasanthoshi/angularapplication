@@ -1,0 +1,29 @@
+<app-application-providerprofile 
+[provider]="provider$ | async" 
+[applicationLookups]="applicationLookups$ | async"
+[programTypeId] = "programTypeId$ |async"
+[licenseStatusId] = "licenseStatusId$ |async"
+(create)="createProvider($event)"
+(update)="updateProvider($event)">
+</app-application-providerprofile>
+
+<ion-grid fixed>
+  <ion-row  class="ion-margin-horizontal">
+    <ion-col class="ion-hide-md-down"></ion-col>
+    <ion-col class="ion-no-padding  ion-hide-md-down btn-align" size="6">
+      <ion-button   expand="block" id="nextbutton" (click)="nextPage()">
+        Next: Business Hours
+        <ion-icon slot="end" name="caret-forward"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="ion-hide-md-down"></ion-col>
+
+
+    <ion-col class="ion-no-padding  ion-hide-md-up" size-xs="12">
+      <ion-button  class="btn-size" expand="block" id="nextbutton" (click)="nextPage()">
+        Next: Business Hours
+        <ion-icon slot="end" name="caret-forward"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

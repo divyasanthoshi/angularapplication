@@ -1,0 +1,49 @@
+<ion-grid fixed class="ion-no-padding ion-text-center fullheight">
+    <ion-row class="fullheight ion-align-items-stretch">
+        <ion-col class="ion-hide-md-down ion-align-self-stretch " offset-md="1" size-md="5">
+            <app-application-ownership-info [hideButtons]="true "></app-application-ownership-info>
+        </ion-col>
+        <ion-col class="ion-align-self-stretch" size-md="5">
+            <ion-row>
+                <ion-col>
+                    <app-application-ownership-toggle [value]="isIncorporated$ | async" [options]="incoporatedOptions"
+                    (onChange)="toggleIncoporated($event)">
+                </app-application-ownership-toggle>
+                </ion-col>
+            </ion-row>
+            
+            <ion-row>
+                <ion-col>
+                    <app-application-ownership-incorporated [hidden]="!isIncorporated" [ownership]="ownership$ | async"
+                    [searchedOrganization]="searchedOrganization$ | async" [providerId]="providerId"
+                    (documentNum)="searchIncorporated($event)" (create)="createIncorporated($event)"
+                    (update)="updateIncorporated($event)">
+                </app-application-ownership-incorporated>
+    
+                <app-application-ownership-unincorporated [hidden]="isIncorporated"
+                    [lookupUnincorporated]="unIncorporatedOwnershipTypes$ | async" [people]="people$ | async"
+                    [ownership]="ownership$ | async" [providerId]="providerId" (create)="createUnincorporated($event)"
+                    (update)="updateUnincorporated($event)">
+                </app-application-ownership-unincorporated>
+                </ion-col>
+            </ion-row>
+            
+
+            <ion-grid fixed class="ion-padding-horizontal btn-align ">
+                <ion-row>
+                    <ion-col  size-xs="6" size-md="6" class="btn-back">
+                        <ion-button expand="block" fill="outline" [routerLink]="previousPageUrl"
+                            queryParamsHandling="preserve" routerLinkActive="router-link-active">Back
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size-xs="6" size-md="6" class="btn-save">
+                        <ion-button expand="block" (click)="nextPage()">
+                            Next: People 
+                            <ion-icon slot="end" name="caret-forward"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-col>
+    </ion-row>
+</ion-grid>

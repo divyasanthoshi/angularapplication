@@ -1,0 +1,51 @@
+<ion-grid fixed class="fullheight ion-no-padding">
+    <ion-row class="fullheight">
+        <ion-col size-md="4" class="ion-hide-md-down">
+            <app-shared-documents-people [formTypeId]="formTypeId" [documentsPeople]="peopleDocuments$ | async"
+                (navigateToPeopleForm)="navigateToPeopleForm($event)">
+            </app-shared-documents-people>
+        </ion-col>
+        <ion-col size-xs="12" size-md="8" class="ion-no-padding">
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <app-shared-attachment
+                        [attachmentCount]="(childAbuseReportingDetails$ | async)?.attachmentCount">
+                    </app-shared-attachment>
+                    <ion-note class="ion-padding-horizontal"><span class="bold canr-helpertextoptional">Optional:</span>
+                        Attach documents that supplement Attestation of Child Abuse Reporting </ion-note>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-padding-top">
+                    <ion-col>
+                        <app-application-childabusereporting [personName]="personName" 
+                        [formItem]="formItem"
+                        [providerId]="currentProviderId$ | async"
+                        [childAbuseReportingDetails]="childAbuseReportingDetails$ | async"
+                        (create)="createChildAbuseReportingDetail($event)"
+                        (update)="updateChildAbuseReportingDetail($event)">
+                    </app-application-childabusereporting>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <!-- <app-shared-documents-officeuseonly></app-shared-documents-officeuseonly> -->
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size-xs="6" size-md="3" offset-md="3">
+                    <ion-button fill="outline" expand="block" queryParamsHandling="preserve" (click)="cancel()">
+                        Cancel
+                    </ion-button>
+                </ion-col>
+                <ion-col size-xs="6" size-md="3">
+                    <ion-button expand="block" id="nextbutton" queryParamsHandling="preserve" (click)="nextPage()">
+                        Save
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-col>
+</ion-row>
+</ion-grid>

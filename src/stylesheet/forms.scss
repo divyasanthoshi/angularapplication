@@ -1,0 +1,95 @@
+$form-label:0.8em;
+
+form{
+    //style for title for each section
+    h2{
+        font-size:1.2em;
+        font-weight: 400;
+        padding:0;
+        margin:0;
+    }
+    //use for icon for remove section
+    .ion-icon-clickable{
+        cursor: pointer;
+        float: left;
+        margin-left: -5px;
+        font-size: 22px;
+        margin-top: -5px;
+    }
+    //style for labels in a section, make as a flex for center align
+    .form-label-section{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        ion-label{
+            span{
+                color: var(--ion-color-primary);
+                font-weight: 700;
+                font-size: $form-label;
+            }
+        }
+        ion-item{
+            --inner-padding-start:0;
+            --inner-padding-end:0;
+            --padding-start:0;
+            --padding-end:0;
+            
+        }
+        ion-select{
+            --padding-start:0.3em;
+            max-width: 100%;
+            font-size: $form-label;
+            font-weight: 700;
+            color: var(--ion-color-primary);
+        }
+    }
+    //adjust padding for input for compact version example: phonenumber extension
+    ion-item.ion-item-compact{
+        --inner-padding-start:0.3em;
+        --inner-padding-end:0;
+        --padding-start:0.3em;
+        --padding-end:0;
+    }
+    
+    ion-card > ion-item{
+        --inner-padding-start:0;
+        --inner-padding-end:0;
+        --padding-start:0;
+        --padding-end:0;
+    }
+    
+    //style for a slot in list of items, example: AddPhone
+    .ion-item-slot{
+        cursor: pointer;
+
+        span{
+            font-size: 0.85em;
+        }
+        ion-icon{
+            margin-right:6px;
+            margin-left: 13px;
+        }
+    }
+    //fix extra padding causing not align with ion-input
+    ion-datetime{
+        --padding-top:8px;
+        --padding-bottom:9px;
+    }
+    ion-note{
+        font-size:0.8em;
+        padding-left: 15px;
+        display:block;
+        padding-top: 2px;
+    }
+
+    .ion-card-customspacing{
+        padding-bottom: 5px;
+    }
+
+    .form-optional-label{
+        margin-bottom: -15px;
+        margin-top: -10px;
+    }
+}
+

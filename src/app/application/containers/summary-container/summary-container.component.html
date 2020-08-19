@@ -1,0 +1,27 @@
+<app-application-summary
+  [providerProfile]="providerProfile$ | async"
+  [businessHours]="businessHours$ |async"
+  [people]="people$ | async"
+  [services]="services$ | async"
+  [ownership]="ownership$ | async"
+  [lookup]="lookup$ | async"
+  (personnelRedirect)="personnelRedirect($event)"
+>
+</app-application-summary>
+
+<input hidden [value]="currentProviderId$ | async" />
+
+<ion-grid fixed class="ion-padding-horizontal">
+  <ion-row>
+    <ion-col size-xs="6" size-md="3" offset-md="3">
+      <ion-button fill="outline" expand="block" (click)="previousPage()">
+      Back
+      </ion-button>
+    </ion-col>
+    <ion-col size-xs="6" size-md="3" >
+      <ion-button expand="block" [disabled]="disabledFlag$ | async" (click)="nextPage()">
+        Next
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

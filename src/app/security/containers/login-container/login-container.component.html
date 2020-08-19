@@ -1,0 +1,17 @@
+<ion-content *ngIf="isShow">
+    <div class="ion-hide-sm-down fullheight security-form-container security-form-container-desktop">
+        <app-security-login
+        (loginClick)="loginClick()">
+        </app-security-login>
+    </div>
+    <div class="fullwidth fullheight ion-hide-sm-up security-form-container security-form-container-mobile">
+        <app-security-login
+        (loginClick)="loginClick()">
+        </app-security-login>
+    </div>
+</ion-content>
+<div
+        [@loginRoute] = "{value: formState, params: {left: screenX, top: screenY, radius:radius}}"
+        style="height:52px; width:52px; position:absolute;background-color: #596bd4; border-radius:100%;display: none;"
+        [ngStyle]="formState==='Submitted'?{'position': 'absolute', 'top.px': btnTopOffset, 'left.px': btnLeftOffset, 'z-index': '10000','display':'block' }: {}">
+    </div>

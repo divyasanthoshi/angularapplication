@@ -1,0 +1,265 @@
+
+<form [formGroup]="providerForm" *ngIf="providerForm" novalidate>
+  <!--Form Hidden fields-->
+  <input type="hidden" formControlName="providerId" />
+  <input type="hidden" formControlName="providerNumber"/>
+  <input type="hidden" formControlName="programTypeId"/>
+  <input type="hidden" formControlName="licenseStatusId"/>
+  <input type="hidden" formControlName="licenseSubTypeId"/>
+
+  <ion-grid fixed>
+
+    <!--Name Card-->
+    <ion-row name="providerprofile-name" id="providerprofile-name" >
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row class="ion-card-customspacing">
+                <ion-col size-xs="12" size-md="2">
+                  <h2>Name</h2>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10" class="ion-no-margin">
+                  <ion-item>
+                    <ion-label for="name" position="floating">Name of Business</ion-label>
+                    <ion-input name="name" formControlName="name" inputmode="text" appFormControlValidationMsg validationMsgId='name' [value]="providerForm.get('name').value | titlecase"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label for="business" position="floating">{{doingBusinessLabel}}</ion-label>
+                    <ion-input name="business" formControlName="dbaName" inputmode="text" appFormControlValidationMsg validationMsgId='business'
+                   (ionFocus)="doingBusinessLabel = 'Doing Business As'"  (ionBlur)="updateDoingBusinessLabel()"  [value]="providerForm.get('dbaName').value | titlecase"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!--Address Card-->
+    <ion-row name="providerprofile-address" id="providerprofile-address" appSectionControl [sectionControlName]="'application-providerprofile-website'" [sectionControlUrl]="currentUrl">
+      <ion-col>        
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-md="2">
+                  <h2>Address</h2>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10">
+                  <ion-item formArrayName="addresses" class="ion-no-padding" *ngFor="let address of addresses.controls; let i=index" >
+                    <ion-grid [formGroupName]="i" class="ion-no-padding forall" >
+                      <!--hidden fields-->
+                      <input type="hidden" name="{{'addressId' + i}}" formControlName="addressId" />
+                      <input type="hidden" name="{{'uspsBarcode' + i}}" formControlName="uspsBarcode" />
+                      <input type="hidden" name="{{'isAddressChanged' + i}}" formControlName="isAddressChanged" />
+                      <ion-row>
+                        <ion-col size-xs="4" size-md="2" class="form-label-section">
+                          <ion-label *ngIf="i === 0">
+                            <!--hidden fields-->
+                            <input type="hidden" name="{{'addressTypeId' + i}}" formControlName="addressTypeId" value="{{mainAddressType}}">
+                            <span> Physical</span>
+                          </ion-label>
+                          <ng-container *ngIf="i !== 0">
+                            <ion-icon class="ion-icon-clickable" color="danger" name="remove-circle" (click)="removeAddressFormGroup(i, $event)"></ion-icon>
+                            <ion-item lines="none">
+                              <ion-select name="{{'addressTypeId' + i}}" formControlName="addressTypeId" value = "addressType."
+                              interface="action-sheet" multiple="false" placeholder="Select" [interfaceOptions]="setActionSheetHeader('Select Address Type')">
+                                <ion-select-option *ngFor="let addressType of applicationLookups.lookupAddressType" [value]="addressType.addressTypeId">{{addressType.description}}</ion-select-option>
+                              </ion-select>
+                            </ion-item>
+                          </ng-container>
+                        </ion-col>
+                        <ion-col size-xs="8" size-md="10" class="ion-col-leftborder">
+                          <ion-item>
+                            <ion-label attr.for="{{'streetAddress' + i}}" position="floating">Address</ion-label>
+                            <ion-input name="{{'streetAddress' + i}}" appFormControlValidationMsg formControlName="streetAddress" inputmode="text" validationMsgId='streetAddress' (ionBlur)="validateAddress(i)">
+                            </ion-input>
+                          </ion-item>
+                          <ion-item>
+                            <ion-label attr.for="{{'city' + i}}" position="floating">City</ion-label>
+                            <ion-input name="{{'city' + i}}" appFormControlValidationMsg formControlName="city" inputmode="text" validationMsgId='city'  (ionBlur)="validateAddress(i)"></ion-input>
+                          </ion-item>
+                            <ion-grid class="ion-no-padding forall">
+                              <ion-row>
+                                <ion-col>
+                                  <ion-item>
+                                    <ion-label attr.for="{{'state' + i}}" position="floating">State</ion-label>
+                                    <ion-input name="{{'state' + i}}" appFormControlValidationMsg formControlName="state" inputmode="text" validationMsgId='state' (ionBlur)="validateAddress(i)"></ion-input>
+                                  </ion-item>
+                                </ion-col>
+                                <ion-col>
+                                  <ion-item class="ion-item-leftborder">
+                                    <ion-label attr.for="{{'zipCode' + i}}" position="floating">Zip</ion-label>
+                                    <ion-input name="{{'zipCode' + i}}" appFormControlValidationMsg formControlName="zipCode" inputmode="decimal" (keypress)="numberOnlyValidation($event)" validationMsgId='zipCode' (ionBlur)="validateAddress(i)" minlength="5" maxlength="5"></ion-input>
+                                  </ion-item>
+                                </ion-col>
+                              </ion-row>
+                            </ion-grid>
+                            <ion-item lines="none" [hidden]="i>0">
+                              <ion-select name="{{'selectedCountyId' + i}}" formControlName="selectedCountyId"  
+                              [interfaceOptions]="setActionSheetHeader('Select County')" interface="action-sheet"
+                              placeholder="Select County" [disabled]="!(address.get('counties').value.length > 1)" >
+                                <ion-select-option *ngFor="let county of address['controls'].counties.value" [value]="county.countyId"> 
+                                  {{  county.county }} 
+                                </ion-select-option>
+                              </ion-select>
+                            </ion-item>   
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10" push-md="2" *ngIf="addresses.controls.length <2" class="form-optional-label">
+                  <ion-item lines="none" class="ion-item-slot" (click)="addAddressFormGroup($event)">
+                    <ion-icon slot="start" name="add-circle" color="success"></ion-icon>
+                    <span>Add Mailing Address (if different from physical)</span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!--Phone Card-->
+    <ion-row name="providerprofile-phone" id="providerprofile-phone">
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-md="2">
+                  <h2>Phone</h2>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10">
+                  <ion-item  formArrayName="phones" class="ion-no-padding" *ngFor="let phone of phones.controls; let i=index">
+                    <ion-grid [formGroupName]="i"  class="ion-no-padding forall">
+                      <!--hidden fields-->
+                      <input type= "hidden" formControlName="uniquePhoneId" />
+                      <ion-row>
+                        <ion-col size-xs="4" size-md="2" class="form-label-section">
+                          <ion-label *ngIf="i === 0" attr.for="{{'phoneNumber' + i}}">
+                            <!--hidden fields-->
+                            <input type="hidden" name="{{'phoneNumberTypeId' + i}}" appFormControlValidationMsg formControlName="phoneNumberTypeId" value="{{landlinePhoneType}}">
+                            <span> Landline</span>
+                          </ion-label>
+                          <ng-container *ngIf="i !== 0">
+                            <ion-icon class="ion-icon-clickable" color="danger" name="remove-circle" (click)="removePhoneFormGroup(i, $event)"></ion-icon>
+                            <ion-item lines="none">
+                              <ion-select name="{{'phoneNumberTypeId' + i}}" formControlName="phoneNumberTypeId" [interfaceOptions]="setActionSheetHeader('Select Phone Type')"
+                              interface="action-sheet" multiple="false" placeholder="Select" (ionChange)="changePhoneType($event)">
+                                  <ion-select-option *ngFor="let phoneType of phoneTypes" [value]="phoneType.phoneNumberTypeId">{{phoneType.description}}</ion-select-option>
+                              </ion-select>
+                            </ion-item>
+                          </ng-container>
+                        </ion-col>
+                        <ion-col class="ion-col-leftborder">
+                          <ion-item>
+                            <ion-label attr.for="{{'phoneNumber' + i}}" position="floating"> </ion-label>
+                            <ion-input name="{{'phoneNumber' + i}}" appFormControlValidationMsg formControlName="phoneNumber" inputmode="tel" [appPhoneMask]="phoneMask"  maxlength="14" validationMsgId='phoneNumber'>
+                            </ion-input>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="3" class="ion-no-padding ion-col-leftborder" *ngIf="phone && phone.value.phoneNumberTypeId === landlinePhoneType">
+                          <ion-item class="ion-item-compact">
+                            <ion-label attr.for="{{'phoneNumberExtension' + i}}" position="floating">Ext</ion-label>
+                            <ion-input name="{{'phoneNumberExtension' + i}}" appFormControlValidationMsg formControlName="phoneNumberExtension" [appPhoneMask]="extensionMask"  maxlength="5" name="extn" ></ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10" push-md="2" *ngIf="phones.controls.length < 2" class="form-optional-label">
+                  <ion-item lines="none" class="ion-item-slot" (click)="addPhoneFormGroup($event)">
+                    <ion-icon slot="start" name="add-circle" color="success"></ion-icon>
+                    <span>Add Phone</span> <span class="fadetext">&nbsp;(Optional) </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!--Email Card-->
+    <ion-row name="providerprofile-email" id="providerprofile-email">
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-md="2">
+                  <h2>Email</h2>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10">
+                  <ion-item  formArrayName="emails" class="ion-no-padding" *ngFor="let email of emails.controls; let i=index">
+                    <ion-grid [formGroupName]="i"  class="ion-no-padding forall">
+                      <!--hidden fields-->
+                      <input type= "hidden" formControlName="uniqueEmailId" />
+                      <ion-row>
+                        <ion-col size-xs="4" size-md="2" class="form-label-section">
+                          <ion-label attr.for="{{'email' + i}}" *ngIf="i===0">
+                            <!--hidden fields-->
+                            <input type="hidden" name="{{'emailAddressTypeId' + i}}" formControlName="emailAddressTypeId" value="{{primaryEmailType}}">
+                            <span> Primary</span>
+                          </ion-label>
+                          <ng-container *ngIf="i !== 0">
+                            <ion-icon class="ion-icon-clickable" color="danger" name="remove-circle" (click)="removeEmailFormGroup(i, $event)"></ion-icon>
+                            <ion-item lines="none">
+                              <ion-select name="{{'emailAddressTypeId' + i}}" formControlName="emailAddressTypeId" 
+                              interface="action-sheet" multiple="false" placeholder="Select" [interfaceOptions]="setActionSheetHeader('Select Email Type')">
+                                <ion-select-option *ngFor="let emailType of applicationLookups.lookupEmailAddressType" [value]="emailType.emailAddressTypeId">{{emailType.description}}</ion-select-option>
+                              </ion-select>
+                            </ion-item>
+                          </ng-container>
+                        </ion-col>
+                        <ion-col size-xs="8" size-md="10" class="ion-col-leftborder">
+                          <ion-item>
+                            <ion-input name="{{'email' + i}}" appFormControlValidationMsg formControlName="emailAddress" inputmode="email" validationMsgId='email'></ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10" push-md="2" *ngIf="emails.controls.length < 2" class="form-optional-label">
+                  <ion-item lines="none" class="ion-item-slot" (click)="addEmailFormGroup($event)">
+                    <ion-icon slot="start"  name="add-circle" color="success"></ion-icon>
+                    <span>Add Email</span> <span class="fadetext">&nbsp;(Optional) </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <!--Website Card-->
+    <ion-row name="providerprofile-website" id="providerprofile-website">
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid >
+              <ion-row>
+                <ion-col size-xs="12" size-md="2">
+                  <h2>Website</h2>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10">
+                  <ion-item>
+                    <ion-input name="website" formControlName="website" inputmode="text" appFormControlValidationMsg validationMsgId="website"></ion-input>
+                  </ion-item>
+                  <ion-note class="input-msg">Website where people can find details about your services</ion-note>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>

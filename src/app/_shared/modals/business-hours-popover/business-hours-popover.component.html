@@ -1,0 +1,20 @@
+<ion-list lines="full">
+  <ion-item *ngIf="(navParams.data.index === 0 || navParams.data.index === undefined) && !(navParams.data.length > 1)">
+    <ion-label (click)="addTime() ">Add Time Slot</ion-label>
+  </ion-item>
+  <ion-item *ngIf="navParams.data.index === 0 ||  navParams.data.index === 1">
+    <ion-label (click)="removeTime()">Remove Time Slot</ion-label>
+  </ion-item>
+  <ion-item [disabled]="!navParams.data.clearEnable">
+    <ion-label (click)="clear()">Clear</ion-label>
+  </ion-item>
+  <ion-item [disabled]="!navParams.data.copyEnable">
+    <ion-label (click)="copy()">Copy</ion-label>
+  </ion-item>
+  <ion-item [disabled]="!navParams.data.pasteEnable">
+    <ion-label (click)="paste()">Paste</ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label (click)="openAllDay()">Open 24 Hours/All Days</ion-label>
+  </ion-item>
+</ion-list>

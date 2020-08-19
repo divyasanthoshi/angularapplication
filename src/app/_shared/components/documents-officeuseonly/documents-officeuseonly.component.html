@@ -1,0 +1,62 @@
+<ion-grid fixed class="view-form">
+  <form [formGroup]="documentsOfficeForm">
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none" class="ion-secondary-backgroundborder">
+          <ion-label class="bold">FOR OFFICE USE ONLY</ion-label>
+        </ion-item>
+        <ion-list class="ion-padding-horizontal" *ngIf="value ">
+          <ion-item class="documentsofficeuse-ion-item">
+            <ion-label class="documentsofficeuse-labelcolor">Verification Status</ion-label>
+            <ion-input formControlName="verifiedStatus"></ion-input>
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label for="statusUpdateBy" position="floating" class="documentsofficeuse-ion-item">Status Updated By</ion-label>
+            <ion-input name="statusUpdateBy" formControlName="statusUpdateBy" inputmode="text">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label for="verifiedDate" position="floating">Verified Date</ion-label>
+            <ion-datetime name="verifiedDate" inputmode="date" formControlName="verifiedDate"  [value]="currentDate.toDateString()" readonly></ion-datetime>
+          </ion-item>
+
+
+          <ion-item lines="none">
+            <ion-label>Notes</ion-label>
+          </ion-item>
+          <ion-item lines="none" class="documentsofficeuse-notesborder documentsofficeuse-ion-item">
+            <ion-textarea auto-grow="true" [maxlength]="textareaMaxlength" formControlName="notes"
+              (ionChange)="updateNotes()"></ion-textarea>
+          </ion-item>
+          <ion-note>{{remainingCharacters}} characters remaining</ion-note>
+        </ion-list>
+
+        <ion-list lines="none"*ngIf="value === false " class="ion-padding-top">
+          <ul class="ion-padding">
+            <li class="title">Verification Status</li>
+            <li><span>Complete</span></li>
+          </ul>
+
+          <ul class="ion-padding">
+            <li class="title">Verified By</li>
+            <li>Reid Cramer </li>
+          </ul>
+
+          <ul class="ion-padding">
+            <li class="title">Verified Date</li>
+            <li>11/22/2016 </li>
+          </ul>
+
+          <ul class="ion-padding">
+            <li class="title">Notes</li>
+            <li><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+               Ut enim ad minim veniam, quis nostrud exercitation </span></li>
+          </ul>
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-grid>

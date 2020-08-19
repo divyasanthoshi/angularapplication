@@ -1,0 +1,85 @@
+<ion-grid fixed>
+  <ion-row>
+    <ion-col>
+      <ion-card class="ion-no-margin">
+        <ion-row>
+          <ion-col class="ion-no-padding">
+            <ion-item color="primary">
+              <ion-lable>{{selfAttestationDetails?.personName}}</ion-lable>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-grid>
+          <ion-row class="selfattestation-itemsalign">
+            <ion-col>
+              <p class=" bold ion-text-center documents-info">
+                ACKNOWLEDGEMENT OF RESPONSIBILITY TO COMPLY WITH ZONING-BUILDING CODE/HOME OWNERS
+                ASSOCIATION/LANDLORD
+              </p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="selfattestation-itemsalign">
+            <ion-col class="ion-no-padding">
+              <p class="documents-info">
+                By signing below, I,
+                <ion-text color="primary">{{selfAttestationDetails?.personName}}</ion-text> applicant of
+                <ion-text color="primary">{{selfAttestationDetails?.providerName}}</ion-text>, attest that I
+                understand that I am responsible for obtaining any required approvals from the local
+                government entity (including the zoning-building code office), Home Owner's Association
+                (if applicable), landlord (if applicable) and any other interested entity prior to
+                operating even through a license has been issued by the Department of Childrens and
+                Families (the "Department") to operate a Child Care Facility, Family Day Care Home, or
+                Large Family Day Care Home.
+                <br>
+                <br>
+                I also understand that Department's issuance of a license is not proof that I have obtained
+                the necessary and required consents and/or permits that may be requried for operation of
+                my business from local government entity, HOA, Landlord, and/or other interested entity.
+                <br>
+                <br>
+                I also acknowledge and agree that if I am issued a license to operate a Child Care Facility,
+                Family Day Care Home, or Large Family Day Care Home by the Department without the necessary
+                approval(s), I will not hold the Department liable if the local government entity, HOA,
+                Landlord, and/or other interested entity imposes a fine or closes my business for non
+                compliance with their requirements.
+                <br>
+                <br>
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-padding-vertical">
+    <ion-col>
+      <!-- Full Name and Date Controls -->
+      <ion-card class="ion-no-margin">
+        <ion-grid>
+          <form [formGroup]="selfattestationform" *ngIf="selfattestationform" novalidate>
+            <ion-row>
+              <ion-col class="ion-no-margin" size="12">
+                <ion-list>
+                  <ion-item>
+                    <ion-label for="name" position="floating">Full Name</ion-label>
+                    <ion-input name="name" formControlName="name" inputmode="text" appFormControlValidationMsg
+                      validationMsgId='name'></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label for="date" position="floating">Date</ion-label>
+                    <ion-datetime name="date" displayFormat="MM/DD/YYYY" inputmode="date" readonly formControlName="date"></ion-datetime>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-grid>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-note class="selfattestation-notealign">
+    By typing my name above, I am electronically signing my attestation
+  </ion-note>
+</ion-grid>

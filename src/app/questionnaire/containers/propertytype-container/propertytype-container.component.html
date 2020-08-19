@@ -1,0 +1,15 @@
+<app-questionnaire-propertytype 
+[propertyTypes]="lookupPropertyType$ | async"
+[selectedPropertyType]="currentPropertyTypeId$ | async" 
+(clickedItem)="selectPropertyType($event)">
+</app-questionnaire-propertytype>
+
+<ion-grid class="ion-card-singlebtn">
+    <ion-row>
+        <ion-col size class="ion-text-center">
+            <ion-button expand="block" (click)="validatePropertyType()">
+                Next
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>

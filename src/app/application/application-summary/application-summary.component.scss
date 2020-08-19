@@ -1,0 +1,26 @@
+.summary-wordwrap{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 103%;
+}
+
+.summary-businesshoursgrid{
+    padding: 0px;
+    margin-left: -3px;
+    margin-right: -100px;
+}
+
+.summary-businesshourtimeslot{
+    padding-right:0px;
+    padding-left:0px
+}
+.summary-businesshourlabel{
+    padding-top: 9px;
+}
+
+
+
+.summary-services-unselected{
+    color: var(--ion-color-medium-shade);
+}

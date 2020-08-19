@@ -1,0 +1,27 @@
+<ng-container *ngIf="linkDescription[navParams.data.description]">
+
+    <ion-header>
+        <ion-toolbar>
+            <h4 class="ion-padding-horizontal bold">{{linkDescription[navParams.data.description].title}}</h4>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-list class="ion-text-align ion-padding">
+        <ion-text>{{linkDescription[navParams.data.description].description}}</ion-text>
+
+        <ion-grid class="ion-text-align ion-padding">
+            <ion-row >
+            <ng-container  *ngFor="let county of linkDescription[navParams.data.description].counties">
+                    <ion-col size-xs="12" size-md="6"  class="ion-popover-columnpadding">
+                        <ion-label *ngIf="county.countyName" class="bold">{{county.countyName}}</ion-label><br>
+                        <span *ngIf="county.personName"><b>{{county.personName}}</b></span><br>
+                        <span *ngIf="county.personAddress">{{county.personAddress}}</span><br>
+                        <span *ngIf="county.personAddress2">{{county.personAddress2}}</span><br>
+                        <span *ngIf="county.personTelephone">Phone: {{county.personTelephone}}</span><br>
+                        <span *ngIf="county.personEmail">{{county.personEmail}}</span>
+                    </ion-col>
+                </ng-container>
+            </ion-row>
+        </ion-grid>
+    </ion-list>
+</ng-container>

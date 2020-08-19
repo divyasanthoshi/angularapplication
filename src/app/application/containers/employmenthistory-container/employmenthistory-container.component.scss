@@ -1,0 +1,30 @@
+.btn-bordercolor {
+    border: 1.5px solid rgba(89,107,212, 0.5);
+    border-radius: 2px;
+    overflow: hidden;
+    }
+
+span{
+    color:var(--ion-color-primary);
+}
+    
+.emphis-addbtn{
+    margin-left: 33px;
+    margin-top: -90px;
+}
+
+.emphis-helpertext{
+    font-size: 1.0em;
+}
+
+.emphis-lottieheight{
+    max-height: 410px;
+}
+
+.emphis-emptystate{
+    margin-top:33px;
+}
+
+.emphis-helpertextoptional{
+    color: var(--ion-color-dark-shade);
+}

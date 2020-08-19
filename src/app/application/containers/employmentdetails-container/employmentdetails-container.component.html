@@ -1,0 +1,46 @@
+<ion-grid fixed class="fullheight ion-no-padding">
+    <ion-row class="fullheight">
+        <ion-col size-md="4" class="ion-hide-md-down">
+            <app-application-employmenthistory [employmentHistory]="employmentHistory$ | async"
+                (view)="viewEmploymentDetails($event)" (create)="createEmploymentDetail($event)">
+            </app-application-employmenthistory>
+        </ion-col>
+        <ion-col size-xs="12" size-md="8" class="ion-no-padding">
+            <ion-grid class="ion-no-padding ion-text-center fullheight">
+                <ion-row class="ion-align-items-stretch">
+                    <ion-col class="ion-align-self-stretch">
+                        <app-application-employmentdetails [employmentDetail]="employmentDetail$ | async"
+                            [value]="isEmployed$ | async" [options]="employmentStatusOptions" [formId]="formId"
+                            [personId]="currentPersonId$ | async" [providerId]="providerId$ | async"
+                            [formLookups]="formLookups$ | async" [applicationLookups]="applicationLookups$ | async"
+                            [personName]="personName"
+                            (createEmployed)="createEmploymentDetailsEdit($event)"
+                            (createUnemployed)="createUnemployedDetailsEdit($event)"
+                            (updateEmployed)="updateEmploymentDetailsEdit($event)"
+                            (updateUnemployed)="updateUnemploymentDetailsEdit($event)">
+                        </app-application-employmentdetails>
+                    </ion-col>
+                </ion-row>
+                <!-- <ion-row>
+        <app-shared-documents-officeuseonly></app-shared-documents-officeuseonly>
+    </ion-row> -->
+                <ion-row class="ion-padding">
+                    <ion-col size="2">
+                        <ion-icon size="large" color="danger" name="trash" (click)=" launchErrorModal()"></ion-icon>
+                    </ion-col>
+                    <ion-col offset="3" size="3">
+                        <ion-button fill="outline" expand="block" (click)="cancel()" class="ion-padding-right">
+                            Cancel
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="3">
+                        <ion-button expand="block" id="nextbutton" (click)="nextPage()" class="ion-padding-left">
+                            Save
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+
+            </ion-grid>
+        </ion-col>
+    </ion-row>
+</ion-grid>

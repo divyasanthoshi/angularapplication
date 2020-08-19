@@ -1,0 +1,283 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import "_config.scss";
+@import "forms.scss";
+
+///<summary>
+/// This section is focusing on creating generic classes for global use
+///</summary
+
+//#region generic
+.transparent {
+    opacity: 0;
+}
+.bold {
+    font-weight: 500;
+}
+.fullwidth {
+    width: 100%;
+}
+.fullheight {
+    height: 100%;
+}
+.height-80 {
+    height: 80%;
+}
+.height-30 {
+    height: 30%;
+}
+.height-70 {
+    height: 70%;
+}
+
+.fadetext {
+    color: $c-font-secondary;
+}
+
+.fontawesome-icon {
+    font-size: $fa-icon;
+}
+
+.icon-resize {
+    font-size: $ion-icon;
+}
+.documents-info {
+    font-size: 1.1em;
+    padding: 0 16px;
+    color: var(--ion-color-secondary-contrast);
+}
+ion-title {
+    .ion-title-subtitle {
+        font-size: $ion-title-subtitle-fs;
+        margin: 0;
+        font-weight: 400;
+        word-wrap: break-word;
+        white-space: normal;
+    }
+}
+ion-app {
+    position: relative;
+}
+ion-note,
+ion-card-subtitle {
+    color: $c-font-secondary;
+}
+
+ion-content:first-of-type {
+    --background: #f4f6fc;
+}
+ion-button {
+    text-align: center;
+    font-weight: bold;
+    --border-width: 1px;
+    max-width: 300px;
+}
+ion-item {
+    --background-focused-opacity: 0;
+}
+
+h4 {
+    font-weight: 400;
+}
+
+ion-note {
+    text-align: left;
+    font-size: 0.8em;
+    display: inline-block;
+}
+
+.ion-icon-ellipse {
+    color: var(--ion-color-light-shade);
+    font-size: 1.2em;
+    margin-top: 16px;
+}
+.img-personavatar-emptypage{
+    width: 100%;
+    max-width: 350px;
+    padding: 15px 30px 0 30px;
+    display: inline-block;
+}
+.ion-icon-chevron-forward{
+    margin-right: -7px;
+    color: var( --ion-color-light-shade);
+}
+
+.ion-icon-checkmark{
+    margin-left: 0px;
+    padding-right:12px;
+}
+
+ion-checkbox {
+    --border-radius: 4px;
+    --border-width: 1.5px;
+    --border-color: var(--ion-color-light-shade);
+    --size: 23px;
+}
+
+.ion-icon-attach{
+    color: var(--ion-color-secondary-contrast);
+    font-size: 1.9em;
+}
+.scrollable {
+    overflow-y: auto;
+}
+
+.ion-item-lines-padding{
+    padding: 0px 4px;
+}
+//add left border for the form group
+ion-col.ion-col-leftborder,
+ion-item.ion-item-leftborder {
+    border-left: 1px solid lightgrey;
+}
+
+ion-col.ion-col-rightborder,
+ion-item.ion-item-rightborder {
+    border-right: 1px solid lightgrey;
+}
+ion-item.ion-item-no-padding {
+    --padding-start: 0 !important;
+    --inner-padding-end: 0 !important;
+}
+
+//remove pading for grid
+ion-grid.ion-no-padding {
+    &.forall {
+        & > ion-row {
+            padding: 0;
+            & > ion-col {
+                padding: 0;
+            }
+        }
+    }
+    &.top {
+        & > ion-row {
+            padding-top: 0;
+            & > ion-col {
+                padding-top: 0;
+            }
+        }
+    }
+    &.bottom {
+        & > ion-row {
+            padding-bottom: 0;
+            & > ion-col {
+                padding-bottom: 0;
+            }
+        }
+    }
+    &.left {
+        & > ion-row {
+            padding-left: 0;
+            & > ion-col {
+                padding-left: 0;
+            }
+        }
+    }
+}
+//#endregion generic
+
+///<summary>
+/// This section is focusing on creating basic classes for ionic colors
+/// including color and background colors
+///</summary
+
+// #region color
+.ion-primary {
+    color: var(--ion-color-primary);
+}
+.ion-primary-background {
+    background-color: var(--ion-color-primary);
+}
+.ion-danger {
+    color: var(--ion-color-danger);
+}
+.ion-danger-background {
+    background-color: var(--ion-color-danger);
+}
+
+.ion-secondary-backgroundborder{
+    --background: var(--ion-color-secondary-shade);
+     border-top:1px solid var(--ion-color-primary);
+}
+
+.ion-custom-background-success{
+    background: lighten($ion-color-success-shade, 55%);
+}
+
+.ion-custom-background-danger{
+    background:lighten($ion-color-danger-tint, 32%);
+}
+//#endregion color
+
+.ion-searchbar-input {
+    border-radius: 4px !important;
+    border: 1.5px solid rgba(115, 115, 115, 0.3);
+    --box-shadow: none;
+    background: var(--ion-color-primary-contrast);
+}
+
+.divider:not(:last-child) {
+    border: 1px solid var(--ion-color-light-shade);
+    margin: 20px 0;
+}
+
+.ion-grid-border {
+    background: var(--ion-color-primary-contrast);
+    border: 1.5px solid rgba(89, 107, 212, 0.5);
+    margin-top: 15px;
+}
+
+.fabbutton-fixed {
+    position: fixed;
+    bottom: 3rem;
+    right: 1rem;
+}
+
+.fabbutton-fixed-nobutton {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+@media (min-width: 1024px) {
+    .fabbutton-fixed {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+}
+
+.hide-native-scrollbar {
+    scrollbar-width: none;
+    /* Firefox 64 */
+    -ms-overflow-style: none;
+    /* Internet Explorer 11 */
+    &::-webkit-scrollbar {
+        /** WebKit */
+        display: none;
+    }
+}

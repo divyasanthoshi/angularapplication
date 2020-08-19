@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="indigogradience">
+    <ion-buttons slot="start">
+      <ion-button (click)="goHomePage()">
+        <ion-icon slot="icon-only" name="arrow-back" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-start ion-title-header" *ngIf="showHeader">
+      Questionnaire
+      <p class="ion-title-subtitle ion-hide-md-up">
+        Choose from the options below to find the appropriate childcare program
+        type for you.
+      </p>
+    </ion-title>
+    <ion-title class="ion-text-start ion-title-header" *ngIf="!showHeader">
+      Recommendation
+      <p class="ion-title-subtitle ion-hide-md-up">
+        Based upon your selctions, you may submit an application to operate any of
+        these programs.
+      </p>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<app-shared-pagelevelvalidation></app-shared-pagelevelvalidation>
+<ion-content class="ion-card-legend withbtn questionnaire-card-margin ion-content-shade">
+  <ion-note class="ion-hide-sm-down" *ngIf="showHeader">
+    Choose from the options below <br> to find the appropriate childcare program
+    type for you.
+  </ion-note>  
+  <router-outlet></router-outlet>
+</ion-content>

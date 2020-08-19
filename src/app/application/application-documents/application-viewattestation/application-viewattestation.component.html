@@ -1,0 +1,135 @@
+
+<div> 
+
+  <ion-grid fixed>
+    <ion-row >
+      <ion-col>
+        <ion-card class="ion-no-margin">
+          <ion-row>
+            <ion-col class="ion-no-padding">
+              <ion-item color="primary">
+                <ion-lable>{{personName | titlecase}} | Attestation Of Good Moral Character</ion-lable>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p class="documents-info">
+                I,<ion-text color="primary">{{personName | titlecase}}</ion-text> who , as an applicant for employment with ,
+                an employee of ,a volunteer for,or an applicant to volunteer with <ion-text color="primary"> {{provider?.name}}
+                </ion-text>, I affirm and attest under penalty of perjury that i meet the moral character
+                requirements for employment, as required by Chapter 435 Florida Statutes in that:
+              </p>
+              <p class="documents-info">
+                I have not been arrested with disposition pending or found guilt of,regardless of
+                adjudication, or entered a plea of nolo contendere or guilt to, or have been adjudicated delinquent and
+                the record has not been sealed or expunged for, any offense prohibited under any of the following
+                provisions of the
+                Florida
+                Statutes or under any similar statute of another jurisdiction for any of the offenses listed below:
+              </p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row >
+            <ion-col >
+              <ion-list class="ion-padding-start">
+                <ol>
+                  <li *ngFor="let link of attestationLinks">
+                    <ion-item lines="none">
+                      <ng-container *ngIf="link.url !== ''">
+                        <a [href]="link.url" target="_blank">{{link.description}}</a>
+                      </ng-container>
+                      <ng-container *ngIf="link.url === ''">
+                        <ion-text color="primary">{{link.description}}<span>(Former Section 794.041)</span></ion-text>
+                      </ng-container>
+                    </ion-item>
+                  </li>
+                </ol>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+
+          <ion-row >
+            <ion-col>
+              <ion-list lines="none" class="ion-no-padding">
+                  <ion-item class="goodmoralC-itemmargin" >
+                    <ion-grid fixed class="ion-no-padding ion-no-padding-inner ion-no-margin">
+                      <ion-row *ngIf="agmcDetails?.hasCommittedOffence === false" class="goodmoralC-successlabel ion-padding-small ion-custom-background-success">
+                        <ion-col size-xs="2" size-md="1" class="goodmoralC-radiobtn">
+                          <ion-icon size="large" name="radio-button-on-outline" color="primary"  ></ion-icon>
+                        </ion-col>
+                        <ion-col size-xs="10" size-md="11" >
+                          <ion-label class="ion-text-wrap goodmoralC-labelfont">
+                            My record does not contain any of the above listed offenses
+                          </ion-label>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row *ngIf="agmcDetails?.hasCommittedOffence === false">
+                        <ion-col size-xs="2" size-md="1"></ion-col>
+                        <ion-col size-xs="10" size-md="11" class="ion-padding-end">
+                          <p>I attest that I have read the above carefully and state that my attestation here is true and
+                            correct that my record does not contain any of the above listed offenses. I understand,
+                            under penalty of perjury, all employees in such positions of trust or responsibility shall attest
+                            to meeting the requirements for qualifying for employment and agreeing to inform the employer immediately
+                            if arrested for any of the disqualifying offenses. I also understand that it is my
+                            responsibility to obtain clarification on anything contained in this affidavit which I do not understand prior to
+                            signing. I am aware that any omissions, falsifications, misstatements or misrepresentations may disqualify me
+                            from employment consideration and, if I am hired, may be grounds for termination or denial of an exemption
+                            at a later date.</p>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row class="goodmoralC-dangerlabel ion-custom-background-danger" *ngIf="agmcDetails?.hasCommittedOffence === true ">
+                        <ion-col size-xs="2" size-md="1" class="goodmoralC-radiobtn">
+                          <ion-icon size="large" name="radio-button-on-outline" color="primary"  ></ion-icon>
+                        </ion-col>
+                        <ion-col size-xs="10" size-md="11">
+                          <ion-label class="ion-text-wrap goodmoralC-labelfont">
+                            My record contains one or more of the applicable disqualifying acts or offenses listed above.
+                          </ion-label>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row *ngIf="agmcDetails?.hasCommittedOffence === true">
+                        <ion-col size-xs="2" size-md="1"></ion-col>
+                        <ion-col size-md="10" size-md="11" class="ion-padding-end">
+                          <p>To the best of my knowledge and belief, my record contains one
+                            or more of the applicable disqualifying acts or offenses listed above.</p>
+                          <p>If you have previously been granted an exemption for this disqualifying offense, please 
+                            <a href="" class="bold-font">attach</a> a copy of the letter granting such exemption</p>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-padding-vertical">
+      <ion-col>
+        <ion-card class="ion-no-margin">
+          <ion-grid>
+            <ion-row>
+              <ion-col class="ion-no-margin" size="12">
+                <ion-list>
+                  <ion-item>
+                    <!-- <ion-label for="formSignedBy"  position="floating">Full Name</ion-label> -->
+                   <ion-text name="formSignedBy" *ngIf="agmcDetails !== null" position="floating">{{ agmcDetails?.formSignedBy }}</ion-text>
+                   <ion-text name="formSignedBy" *ngIf="agmcDetails === null " position="floating">Full Name</ion-text>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-text name="formSignedDate" *ngIf="agmcDetails !== null " >{{agmcDetails?.formSignedDate }}</ion-text>
+                    <ion-text name="formSignedDate" *ngIf="agmcDetails === null " >{{showCurrentDate}}</ion-text>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</div>

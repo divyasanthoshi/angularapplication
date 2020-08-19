@@ -1,0 +1,38 @@
+<ion-grid class="ion-no-padding">
+  <ion-row>
+      <ion-col>
+          <app-shared-attachment [attachmentCount]="(selfAttestationDetails$ | async)?.attachmentCount"></app-shared-attachment>
+          <ion-note class="ion-padding-horizontal"><span class="bold canr-helpertextoptional">Optional:</span>
+            Attach documents that supplement of self attestation</ion-note>
+      </ion-col>
+  </ion-row>
+
+  <ion-row>
+      <ion-col>
+          <app-application-selfattestation
+            [formItem]="formItem" [providerId]="currentProviderId$ | async"
+            [selfAttestationDetails]="(selfAttestationDetails$ | async)"
+            [zoningAttestationDetail]="(zoningAttestationSourceList$ | async)?.zoningAttestationDetail"
+            (create)="createSelfAttestationDetail($event)" (update)="updateSelfAttestationDetail($event)"
+          ></app-application-selfattestation>
+      </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+
+<ion-grid fixed>
+  <ion-row>
+      <ion-col size-xs="6" size-md="3" offset-md="3">
+          <ion-button fill="outline" expand="block" queryParamsHandling="preserve" (click)="cancel()">
+              Cancel
+          </ion-button>
+      </ion-col>
+      <ion-col size-xs="6" size-md="3">
+          <ion-button expand="block" id="nextbutton" queryParamsHandling="preserve" (click)="nextPage()">
+              Save
+          </ion-button>
+      </ion-col>
+  </ion-row>
+</ion-grid>

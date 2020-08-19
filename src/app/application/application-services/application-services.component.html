@@ -1,0 +1,41 @@
+<ion-title class="ion-text-center ion-padding ">Select services you offer</ion-title>
+<!--Services-->
+<form [formGroup]="servicesForm">
+  <app-shared-pagelevelvalidation></app-shared-pagelevelvalidation>
+  <ion-grid fixed fullheight>
+    
+    <ion-row>
+      <ng-container formArrayName="services" *ngFor="let service of servicesFormArray.controls, let i=index">
+        <ion-col size-md="6" size="12">
+          <ion-item lines="none" >
+              <div class="fixed-height">
+              <ng-container >
+                <lottie-player slot="start" class="services-lottie-img" [src]="serviceList[i].imagePath">
+                </lottie-player>
+              </ng-container>
+            </div>
+            <ion-grid class="services-sm-gridmargin">
+              <ion-row class="ion-align-items-center rowspacing" >
+                <ion-col size-xs="8" size-md="9">
+                  <ion-text class="ion-float-left font">{{serviceList[i].title}}<br/>
+                    <ion-note class="ion-no-padding ion-hide-md-down">{{serviceList[i].description}}</ion-note>
+                  </ion-text>
+                </ion-col>
+                <ion-col size-xs="4" size-md="3">
+                  <ion-toggle class="ion-float-right" mode="ios" color="success"  [value]="serviceList[i].serviceId" name={{i}}
+                  [formControlName]="i" (ionChange)="ChangeEvent($event)"></ion-toggle>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-hide-md-up">
+                <ion-col size-sm="11">
+                <ion-note class="ion-no-padding">{{serviceList[i].description}}</ion-note>
+                </ion-col>
+              </ion-row>
+              </ion-grid>
+
+          </ion-item>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
+</form>

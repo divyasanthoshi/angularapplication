@@ -1,0 +1,415 @@
+<div class=" contrastcontainer ">
+  <ion-grid fixed *ngIf="lookup">
+    <div>
+      <!-- provider section -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="sc-ion-buttons-md-s">
+            <ion-title class="ion-float-start ion-no-padding" color="primary">PROVIDER PROFILE</ion-title>
+            <ion-icon class="ion-float-end" name="pencil" color="primary" [routerLink]="providerLink"
+              queryParamsHandling="preserve"></ion-icon>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content *ngIf="providerProfile && providerProfile.providerId !== 0">
+          <ion-grid class="ion-no-padding top bottom">
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none" class="item-has-value">
+                  <ion-label position="floating">Name of Business</ion-label>
+                  <span>{{providerProfile.name | titlecase}}</span>
+                </ion-item>
+                <ion-item lines="none" class="item-has-value ">
+                  <ion-label position="floating">Doing Business as</ion-label>
+                  <span>{{providerProfile.dbaName | titlecase}}</span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="providerProfile.addresses && providerProfile.addresses.length > 0">
+              <ion-col size="12">
+                <ion-title class="ion-float-start ion-no-padding bold" color="primary">Address</ion-title>
+              </ion-col>
+              <ion-col *ngFor="let address of providerProfile.addresses" size="12">
+                <ion-item lines="none" class="item-has-value">
+                  <ion-label position="floating">
+                    {{ lookup.lookupAddressType | lookupvalue: address.addressTypeId:'addressTypeId'}}</ion-label>
+                  <span>{{address | fulladdress}}</span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="providerProfile.phones && providerProfile.phones.length > 0">
+              <ion-col size="12">
+                <ion-title class="ion-float-start ion-no-padding bold" color="primary">Phone</ion-title>
+              </ion-col>
+              <ion-col *ngFor="let phone of providerProfile.phones" size="12">
+                <ion-item lines="none" class="item-has-value">
+                  <ion-label position="floating">
+                    {{lookup.lookupPhoneType | lookupvalue: phone.phoneNumberTypeId:'phoneNumberTypeId'}}</ion-label>
+                  <span>{{phone.phoneNumber | phone:'US'}}</span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="providerProfile.emails && providerProfile.emails.length > 0">
+              <ion-col size="12">
+                <ion-title class="ion-float-start ion-no-padding" color="primary">Email</ion-title>
+              </ion-col>
+              <ion-col *ngFor="let email of providerProfile.emails" size="12">
+                <ion-item lines="none" class="item-has-value">
+                  <ion-label position="floating">
+                    {{lookup.lookupEmailAddressType | lookupvalue:email.emailAddressTypeId: 'emailAddressTypeId'}}
+                  </ion-label>
+                  <span class="summary-wordwrap">{{email.emailAddress}}</span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-title class="ion-float-start ion-no-padding" color="primary">Website</ion-title>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none" class="item-has-value">
+                  <ion-label position="floating">Childcare Website</ion-label>
+                  <span>{{providerProfile.website}}</span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- BusinessHours section-->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="sc-ion-buttons-md-s">
+            <ion-title class="ion-float-start ion-no-padding" color="primary">BUSINESS HOURS</ion-title>
+            <ion-icon class="ion-float-end" name="pencil" color="primary" [routerLink]="businessHoursLink"
+              queryParamsHandling="preserve"></ion-icon>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid class="summary-businesshoursgrid"
+            *ngIf="businessHoursData.monthsOfOperation && businessHoursData.monthsOfOperation.length">
+            <div *ngFor="let monthsopert of businessHoursData.monthsOfOperation">
+              <ion-row>
+                <ion-col size-xs="6" size-md="4">
+                  <ion-item lines="none" *ngIf="monthsopert.monthsOfOperationId" class="ion-float-start ion-no-padding">
+                    <ion-label class="bold ion-text-wrap">{{ openDuringYear[monthsopert.monthsOfOperationId]}}
+                    </ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="4" size-md="2" class="ion-margin-start">
+                  <ion-item lines="none" *ngIf="monthsopert.monthsOfOperationId" class="ion-float-start ion-no-padding">
+                    <ion-label class="bold">
+                      {{ monthsopert.businessDays && monthsopert.businessDays.length ? 'YES': 'NO'}}</ion-label>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="monthsopert.businessDays && monthsopert.businessDays.length">
+                <ion-col size-xs="3" size-md="2" class="ion-hide-md-up ion-margin-horizontal ion-no-padding"></ion-col>
+                <ion-col size-xs="4" size-md="2" class="ion-hide-md-down ion-margin-horizontal ion-padding-end">
+                </ion-col>
+                <ion-col size-xs="3" size-md="2">From</ion-col>
+                <ion-col size-xs="2" size-md="2">Till</ion-col>
+              </ion-row>
+              <ion-row *ngFor="let businessDay of monthsopert.businessDays">
+                <ion-col size-xs="3" size-md="2" class="summary-businesshourlabel">
+                  <ion-item lines="none" class="ion-float-start ion-no-padding">
+                    <ion-label class="bold">{{businessDay.dayOfWeek}}</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ng-container *ngIf="businessDay.timeSlot && businessDay.timeSlot.length; else closedContainer">
+                  <ion-col size-xs="9" size-md="8" class="timeslot">
+                    <div *ngFor="let slot of businessDay.timeSlot">
+                      <ion-row>
+                        <ion-col size-xs="4" size-md="3" class="summary-businesshourtimeslot">
+                          <ion-item lines="none">
+                            <ion-datetime [value]="slot.timeOpen" displayFormat="h:mm A" mode="ios"
+                              class="ion-no-padding top" readonly></ion-datetime>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size-xs="4" size-md="3" class="summary-businesshourtimeslot">
+                          <ion-item lines="none">
+                            <ion-datetime [value]="slot.timeClose" displayFormat="h:mm A" mode="ios"
+                              class="ion-no-padding" readonly></ion-datetime>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </div>
+                  </ion-col>
+                </ng-container>
+                <ng-template #closedContainer>
+                  <ion-col>
+                    <ion-item lines="none">
+                      <ion-label class="bold summary-businesshourlabel">Closed</ion-label>
+                    </ion-item>
+                  </ion-col>
+                </ng-template>
+              </ion-row>
+            </div>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <!--services section-->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="sc-ion-buttons-md-s">
+            <ion-title class="ion-float-start ion-no-padding" color="primary">SERVICES</ion-title>
+            <ion-icon class="ion-float-end" name="pencil" color="primary" [routerLink]="servicesLink"
+              queryParamsHandling="preserve"></ion-icon>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content *ngIf="this.services.serviceList.length > 0 && lookup && lookup.lookupServiceType">
+          <ion-list lines="none">
+            <ion-item *ngFor="let servicelookup of lookup.lookupServiceType">
+              <ion-icon *ngIf="selectedServices.indexOf(servicelookup.serviceId) < 0" color="danger"
+                name="close-circle-outline"></ion-icon>
+              <ion-icon *ngIf="selectedServices.indexOf(servicelookup.serviceId) >= 0" color="success"
+                name="checkmark-outline"></ion-icon>
+              <ion-label class="ion-padding-start"
+                [ngClass]="{'summary-services-unselected': selectedServices.indexOf(servicelookup.serviceId) < 0}">
+                {{servicelookup.description}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+      <!--services section-->
+
+      <!-- People section -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="sc-ion-buttons-md-s">
+            <ion-title class="ion-float-start  ion-no-padding" color="primary">PEOPLE</ion-title>
+            <ion-icon class="ion-float-end" name="pencil" color="primary" [routerLink]="peopleLink"
+              queryParamsHandling="preserve"></ion-icon>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content *ngIf="_people && _people.length > 0">
+          <ng-container *ngFor="let personnel of _people">
+            <ion-grid class="ion-no-padding top bottom">
+              <ion-row>
+                <ion-col>
+                  <ion-title class="ion-no-padding person-titles" color="primary">
+                    <span>
+                      {{personnel.firstName | titlecase}} {{personnel.lastName | titlecase}}'s Profile
+                    </span>
+                    <ion-icon class="ion-float-end" name="pencil" color="primary"
+                      (click)="editPersonnel(personnel.personId)"></ion-icon>
+                  </ion-title>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none" class="item-has-value">
+                    <ion-label position="floating">Full Name</ion-label>
+                    <span>{{personnel?.firstName ? (personnel.firstName | titlecase) : null}}
+                      {{personnel?.lastName ? (personnel.lastName | titlecase) : null}}</span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none" class="item-has-value">
+                    <ion-label position="floating">Date of Birth</ion-label>
+                    <span>{{personnel.dob | date:'mediumDate'}}</span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none" class="item-has-value">
+                    <ion-label position="floating">Social Security Number</ion-label>
+                    <span>{{personnel.ssn | ssnviewmask}}</span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-title class="ion-float-start ion-no-padding" color="primary">Title</ion-title>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none" class="item-has-value ion-text-wrap">
+                    <div class="fullwidth">
+                      <ng-container *ngFor="let personTitle of personnel.personTitles; last as isLast">
+                        <span class="ion-text-nowrap">{{personTitle.personTitle}}</span> <span
+                          *ngIf="!isLast">,&nbsp;</span>
+                      </ng-container>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="personnel.addresses && personnel.addresses.length > 0">
+                <ion-col size="12">
+                  <ion-title class="ion-float-start ion-no-padding" color="primary">Address</ion-title>
+                </ion-col>
+                <ion-col *ngFor="let address of personnel.addresses" size="12">
+                  <ion-item lines="none" class="item-has-value">
+                    <ion-label position="floating">
+                      {{lookup.lookupAddressType | lookupvalue:address.addressTypeId:'addressTypeId'}}</ion-label>
+                    <span>{{address | fulladdress}}</span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="personnel.phones && personnel.phones.length > 0">
+                <ion-col size="12">
+                  <ion-title class="ion-float-start ion-no-padding" color="primary">Phone</ion-title>
+                </ion-col>
+                <ion-col *ngFor="let phone of personnel.phones" size="12">
+                  <ion-item lines="none" class="item-has-value">
+                    <ion-label position="floating">
+                      {{lookup.lookupPhoneType | lookupvalue:phone.phoneNumberTypeId:'phoneNumberTypeId'}}</ion-label>
+                    <span>{{personnel.phones[0].phoneNumber | phone:'US'}}</span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="personnel.emails && personnel.emails.length > 0">
+                <ion-col size="12">
+                  <ion-title class="ion-float-start ion-no-padding" color="primary">Email</ion-title>
+                </ion-col>
+                <ion-col *ngFor="let email of personnel.emails" size="12">
+                  <ion-item lines="none" class="item-has-value">
+                    <ion-label position="floating">
+                      {{lookup.lookupEmailAddressType | lookupvalue: email.emailAddressTypeId:'emailAddressTypeId'}}
+                    </ion-label>
+                    <span class="summary-wordwrap">{{personnel.emails[0].emailAddress}}</span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="personnel.driverLicense">
+                <ion-col>
+                  <ion-title class="ion-float-start ion-no-padding" color="primary">Driver's License</ion-title>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="personnel.driverLicense">
+                <ion-col>
+                  <ion-item lines="none" class="item-has-value">
+                    <ion-label position="floating">License Number</ion-label>
+                    <span>{{personnel.driverLicense  | mask : 'LNNN-NNN-NN-NNN-N' }}</span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="personnel.driverLicense">
+                <ion-col>
+                  <ion-item lines="none" class="item-has-value">
+                    <ion-label position="floating">State</ion-label>
+                    <span>{{personnel.driverLicenseState | uppercase}}</span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="personnel.driverLicense">
+                <ion-col>
+                  <ion-item lines="none" class="item-has-value">
+                    <ion-label position="floating">Expiration Date</ion-label>
+                    <span>{{personnel.driverLicenseExpiryDate | date:'mediumDate'}}</span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <div class="divider"></div>
+          </ng-container>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Ownership section -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="sc-ion-buttons-md-s">
+            <ion-title class="ion-float-start ion-no-padding" color="primary">OWNERSHIP</ion-title>
+            <ion-icon class="ion-float-end" name="pencil" color="primary" [routerLink]="ownershipLink"
+              queryParamsHandling="preserve"></ion-icon>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content *ngIf="ownership && ownership.ownershipTypeId">
+          <ion-grid *ngIf="ownership && ownership.organization && ownership.organization.organizationId"
+            class="ion-no-padding top bottom">
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none" class="item-has-value">
+                  <ion-label position="floating">Document Number</ion-label>
+                  <span>{{ownership.organization.documentNumber}}</span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none" class="item-has-value ">
+                  <ion-label position="floating">Entity Name</ion-label>
+                  <span>{{ownership.organization.name | titlecase}}</span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none" class="item-has-value">
+                  <ion-label position="floating">Primary Address</ion-label>
+                  <span>{{ownership.organization.mainAddress | fulladdress}}</span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none" class="item-has-value">
+                  <ion-label position="floating">Federal Employer ID (FEIN)</ion-label>
+                  <span>{{ownership.organization.fein}}</span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none" class="item-has-value">
+                  <ion-label position="floating">Business Type</ion-label>
+                  <span>{{ownership.organization.businessType}}</span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none" class="item-has-value">
+                  <ion-label position="floating">Main Phone</ion-label>
+                  <span>{{ownership.organization.phone.phoneNumber | phone:'US'}}</span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none" class="item-has-value">
+                  <ion-label position="floating">Designated Representative</ion-label>
+                  <span>{{ownership.organization.representative}}</span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid *ngIf="!ownership.isIncorporated && _people?.length > 0 && ownership.ownershipTypeId !== 5">
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none" class="item-has-value">
+                  <ion-label position="floating">Ownership Type</ion-label>
+                  <span>
+                    {{lookup.lookupOwnership | lookupvalue: ownership.ownershipTypeId:'ownershipTypeId'}}
+                  </span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none" class="item-has-value">
+                  <ion-label position="floating">Owners</ion-label>
+                  <span>
+                    <ng-container *ngFor="let personnel of ownersList; last as isLast">
+                      <ng-container>
+                        {{personnel.firstName | titlecase}} {{personnel.lastName | titlecase}} {{isLast ? '' : ','}}
+                      </ng-container>
+                    </ng-container>
+                  </span>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-grid>
+</div>

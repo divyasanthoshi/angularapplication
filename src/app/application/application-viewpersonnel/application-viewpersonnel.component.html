@@ -1,0 +1,160 @@
+  <ion-grid *ngIf="applicationLookup && currentViewPersonnel" fixed class="ion-no-padding view-form">
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-md="3">
+                  <ion-label class="form-title">Name</ion-label>
+                </ion-col>
+                <ion-col size-xs="12" size-md="9">
+                  <ul>
+                    <li><span class="title">Full Name</span></li>
+                    <li><span>{{ currentViewPersonnel?.firstName ? (currentViewPersonnel.firstName | titlecase) : null}} {{currentViewPersonnel?.lastName ? (currentViewPersonnel.lastName | titlecase) : null}}</span></li>
+                  </ul>
+                  <ul>
+                    <li><span class="title">Date of Birth</span></li>
+                    <li><span>{{ currentViewPersonnel.dob | date:'mediumDate'}}</span></li>
+                  </ul>
+                  <ul>
+                    <li><span class="title" ui-number-mask="3">Social Security Number</span></li>
+                    <li><span>{{currentViewPersonnel.ssn | ssnviewmask}}</span></li>
+                  </ul>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-md="3">
+                  <ion-label class="form-title">Role</ion-label>
+                </ion-col>
+                <ion-col size-xs="12" size-md="9">
+                  <ul>
+                    <li>
+                      <ng-container *ngFor="let personTitle of currentViewPersonnel.personTitles; last as isLast">
+                        <span >{{personTitle.personTitle}}</span> <span *ngIf="!isLast">,&nbsp;</span>
+                      </ng-container>
+                    </li>
+                  </ul>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-md="3">
+                  <ion-label class="form-title">Address</ion-label>
+                </ion-col>
+                <ion-col size-xs="12" size-md="9">
+                  <ul *ngFor="let address of currentViewPersonnel.addresses">
+                    <li><span class="title">{{applicationLookup.lookupAddressType | lookupvalue: address.addressTypeId:'addressTypeId'}}</span></li>
+                    <li><span>{{ address.streetAddress}}</span></li>
+                    <li><span>{{ address.city}}, {{ address.state}} {{ address.zipCode}}</span></li>
+                  </ul>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-md="3">
+                  <ion-label class="form-title">Phone</ion-label>
+                </ion-col>
+                <ion-col size-xs="12" size-md="9">
+                  <ul *ngFor="let phone of currentViewPersonnel.phones">
+                    <li><span class="title">{{applicationLookup.lookupPhoneType | lookupvalue: phone.phoneNumberTypeId:'phoneNumberTypeId'}}</span></li>
+                    <li><span>{{phone.phoneNumber | phone:'US'}}</span></li>
+                  </ul>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-md="3">
+                  <ion-label class="form-title">Email</ion-label>
+                </ion-col>
+                <ion-col size-xs="12" size-md="9">
+                  <ul *ngFor="let email of currentViewPersonnel.emails">
+                    <li><span class="title">{{applicationLookup.lookupEmailAddressType | lookupvalue: email.emailAddressTypeId:'emailAddressTypeId'}}</span></li>
+                    <li><span>{{email.emailAddress}}</span></li>
+                  </ul>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-md="3">
+                  <ion-label class="form-title">Driver's License <br> 
+                      <ion-text class="fadetext"> {{currentViewPersonnel.driverLicense ?  '': "(Optional)"}}</ion-text></ion-label>
+                </ion-col>
+                <ion-row>
+                  <ion-col size-xs="12" size-md="9">
+                    <ul>
+                      <li><span class="title">Driver License Number</span></li>
+                      <li><span >{{currentViewPersonnel?.driverLicenseState?.toLowerCase() !== 'fl' ? currentViewPersonnel.driverLicense : currentViewPersonnel.driverLicense | mask : 'LNNN-NNN-NN-NNN-N' }}</span></li>
+                    </ul>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="4">
+                    <ul>
+                      <li><span class="title">State</span></li>
+                      <li><span>{{currentViewPersonnel.driverLicenseState | uppercase}}</span></li>
+                    </ul>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="5">
+                    <ul>
+                      <li><span class="title">Expiration Date</span></li>
+                      <li><span>{{currentViewPersonnel.driverLicenseExpiryDate | date:'mediumDate'}}</span></li>
+                    </ul>
+                  </ion-col>
+                </ion-row>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>

@@ -1,0 +1,23 @@
+/**********************************************************
+
+This is the config file to directly change some of the styling parameters in the application
+
+abbreviations:
+
+*-fs: font-size
+*-c: color
+
+**********************************************************/
+@import './theme/variables.scss';
+
+$ion-title-subtitle-fs:0.55em;
+$fa-icon: 2.8em ;
+$ion-icon:3.5em;
+$c-font-secondary: #737373;
+// $ion-checkmark-success: #55A07C;
+// $ion-checkmark-danger:#f04141;
+// $ion-background-success: #69F0AE;
+$ion-color-primary-contrast:#ffffff;
+$ion-color-success-shade: #0ec254;
+$ion-color-danger-tint: #f25454;
+$ion-color-secondary-shade: #EBEEFF;

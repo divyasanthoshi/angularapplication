@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Address</ion-title>
+    <ion-note>To ensure prompt and accurate communication,
+    <span *ngIf="hasErrors">please fix the below errors in your address.</span>
+    <span *ngIf="!hasErrors">your address has been corrected as below.</span>
+  </ion-note>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid [ngClass]="{'height-80': hasErrors , 'height-70': !hasErrors}" class="border-section">
+    <ion-row>
+      <ion-col>
+        <ion-label>You entered:</ion-label><br>
+        <p>{{enteredAddress.streetAddress}}</p>
+        <p>{{enteredAddress.city}}, {{enteredAddress.state}}, {{enteredAddress.zipCode}}</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row [hidden]="hasMessages">
+      <ion-col>
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let note of suggestedAddress.smartyStreetsFootNote">
+            <mat-expansion-panel-header class="panel-spacing">
+              <mat-panel-title *ngIf="note.category === 'E'">
+                <span>
+                  <ion-icon name="alert-circle" color="danger" class="icon-alert"></ion-icon>
+                </span>
+                {{note.title}}</mat-panel-title>
+              <mat-panel-title *ngIf="note.category === 'A'">
+                <span>
+                  <ion-icon name="warning" color="warning" class="icon-alert"></ion-icon>
+                </span>
+                {{note.title}}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-panel-description>{{note.description}} </mat-panel-description>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="border-success height-30" *ngIf="!hasErrors">
+    <ion-row>
+      <ion-col>
+        <ion-label>
+          <ion-icon name="checkmark-circle" size="small" color="success" class="icon-success"></ion-icon>
+          Corrected Address:
+        </ion-label><br>
+        <p class="addressvalidation-correctedinfo">{{suggestedAddress.streetAddress}}</p>
+        <p class="addressvalidation-correctedinfo">{{suggestedAddress.city}}, {{suggestedAddress.state}}, {{suggestedAddress.zipCode}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid fixed>
+      <ion-row *ngIf="hasErrors">
+        <ion-col size="6">
+          <ion-button fill="outline" expand="block" (click)="populateSuggestion(true)">Use this address</ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" (click)="populateSuggestion(false)">Let me fix</ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="!hasErrors">
+        <ion-col size="3"></ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" (click)="dismiss()">Got It!</ion-button>
+        </ion-col>
+        <ion-col size="3"></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

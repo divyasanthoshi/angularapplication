@@ -1,0 +1,6 @@
+<app-questionnaire-recommendation 
+[recommendList]="currentRecommandations$ | async"
+[propertyId]="propertyId$ | async"
+(navigateToNext)="navigateTo()"
+(navigateToStart)="navigateToStart()">
+</app-questionnaire-recommendation>

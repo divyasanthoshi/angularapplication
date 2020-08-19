@@ -1,0 +1,22 @@
+<div class="togglesegment">
+  <h4 class="ion-text-start  ion-padding-horizontal">Choose Incorporation Status</h4>
+  <div class=" ion-padding-horizontal">
+    <ion-segment mode="ios" [(ngModel)]="value">
+      <ion-segment-button mode="ios" (click)="toggle_value($event)" [value]="true">
+        <ion-label class="ownershiptoggle-font">
+          {{options[0]}}
+        </ion-label>
+      </ion-segment-button>
+      <ion-segment-button mode="ios" (click)="toggle_value($event)" [value]="false">
+        <ion-label class="ownershiptoggle-font">
+          {{options[1]}}
+        </ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <ion-note class="ion-padding-horizontal" *ngIf="value === 'true' || value === true">Incorporation is the process of legally declaring acorporate
+    entity as separate from its owners(s).
+    This means you have registered your business with Florida Division of Corporation.</ion-note>
+  <ion-note class="ion-padding-horizontal ion-float-left" *ngIf="value === 'false'">Unincorporated business are not legally separate from its
+    Owners.</ion-note>
+</div>

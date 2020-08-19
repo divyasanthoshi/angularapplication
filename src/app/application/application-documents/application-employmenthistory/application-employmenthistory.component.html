@@ -1,0 +1,50 @@
+<div *ngIf="employmentHistory" class="fullheight">
+  <ion-grid fixed
+    *ngIf="employmentHistory.employmentHistoryDetails && employmentHistory.employmentHistoryDetails.length"
+    class="ion-no-padding forall fullheight">
+    <ion-row>
+      <ion-col>
+        <ion-item color="primary" class="ion-padding-top">
+          {{employmentHistory.personName}}
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-no-padding fullheight">
+      <ion-col>
+        <ion-list class="fullheight ion-list-categorized">
+          <ion-item *ngFor="let item of employmentHistory.employmentHistoryDetails" button="true" detail
+            class="ion-padding-horizontal" (click)="clickView(item.isEmployed , item.employmentHistoryByApplicantId)">
+            <ion-label color="primary">
+              <h3>{{item.employerName ? item.employerName : 'Unemployed'}}</h3>
+              <p>
+                ({{item.startDate | date: 'MMMM yyyy'}}-{{item.endDate | date: 'MMMM yyyy'}})
+              </p>
+            </ion-label>
+          </ion-item>
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!employmentHistory.employmentHistoryDetails || !employmentHistory.employmentHistoryDetails?.length"
+    class="fullheight ion-margin-top">
+    <ion-row class="fullheight">
+      <ion-col class="fullheight">
+        <ion-card class="fullheight ion-no-margin">
+          <ion-row class="ion-padding-top">
+            <ion-col class="ion-padding-top">
+              <ion-list class="ion-padding-top">
+                <ion-item color="primary" (click)="navigateTo()" class="emphistory-pointer">
+                  <ion-label>
+                    <h3 class="ion-text-center bold">Add Employment</h3>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

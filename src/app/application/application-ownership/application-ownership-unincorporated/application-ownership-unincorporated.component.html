@@ -1,0 +1,326 @@
+<div>
+  <!-- <ion-text> -->
+    <h4 class="ion-text-start ion-padding-horizontal"> Choose Ownership Type </h4>
+  <!-- </ion-text> -->
+  
+  <ng-container  *ngIf="lookupUnincorporated && lookupUnincorporated.length">
+    <div class="ion-margin-horizontal">
+      <ion-segment [value]="_ownership?.ownershipTypeId" mode="ios" >
+        <ion-segment-button [value]="lookupUnincorporated[1].ownershipTypeId" mode="ios"
+          (click)="segmentChanged(lookupUnincorporated[1].ownershipTypeId)">
+          <img  src="../../../../assets/images/incorporate1.svg" alt="" />
+          <ion-label>{{lookupUnincorporated[1].description}}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button [value]="lookupUnincorporated[2].ownershipTypeId" mode="ios"
+          (click)="segmentChanged(lookupUnincorporated[2].ownershipTypeId)">
+          <img src="../../../../assets/images/incorporate2.svg" alt="" />
+          <ion-label>{{lookupUnincorporated[2].description}}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button [value]="lookupUnincorporated[3].ownershipTypeId" mode="ios"
+          (click)="segmentChanged(lookupUnincorporated[3].ownershipTypeId)">
+          <img  src="../../../../assets/images/incorporate3.svg" alt=""
+            [hidden]="_ownership?.ownershipTypeId === lookupUnincorporated[3].ownershipTypeId" />
+          <img src="../../../../assets/images/incorporate4.svg" alt=""
+            [hidden]="_ownership?.ownershipTypeId !== lookupUnincorporated[3].ownershipTypeId" />
+          <ion-label>{{lookupUnincorporated[3].description}}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  
+    <ng-container [ngSwitch]="_ownership?.ownershipTypeId">
+      <ion-text *ngSwitchCase="lookupUnincorporated[1].ownershipTypeId">
+        <ion-note class="ion-padding-horizontal">
+          An Individual to operate under his/her legal name. This is also known as Sole Propetiership.
+        </ion-note>
+        <h4 class=" ion-text-start ion-padding-horizontal"> Owner</h4>
+      </ion-text>
+  
+      <ion-list  class="ion-margin-horizontal"   *ngSwitchCase="lookupUnincorporated[1].ownershipTypeId">
+        <ion-item *ngFor="let personnel of people">
+          <ion-label>
+            <ion-text color="primary">
+              <h5>{{personnel.firstName + ' ' + personnel.lastName}}</h5>
+            </ion-text>
+            <h6>
+              <p *ngIf="personnel.personTitles">
+                  <ng-container *ngFor="let personTitle of personnel.personTitles ; let isLast=last">
+                        {{personTitle.personTitle}}{{isLast ? '' : ', '}}
+                  </ng-container>
+                </p>
+            </h6>
+          </ion-label>
+        </ion-item>
+          <ion-grid *ngIf="!people?.length">
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <ion-button (click)="createIndividualProfile()">Add Ownership Profile</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-list>
+
+      <ion-fab  vertical="bottom" *ngSwitchCase="lookupUnincorporated[1].ownershipTypeId" horizontal="end" class="fabbutton-fixed" >
+        <ion-fab-button *ngIf="people?.length" (click)="createIndividualProfile()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      
+      <ion-fab vertical="bottom" *ngSwitchCase="lookupUnincorporated[2].ownershipTypeId" horizontal="end" slot="fixed" class="fabbutton-fixed">
+        <ion-fab-button *ngIf="_partnershipPeople.length" (click)="createPartnershipProfile()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+      <ion-note *ngSwitchCase="lookupUnincorporated[1].ownershipTypeId" class="ion-padding-horizontal ion-float-left unincorporated-helpertext">
+        Setup the owner's profile using the 'Add Owner Profile' button above.</ion-note>
+     
+      <ion-text *ngSwitchCase="lookupUnincorporated[2].ownershipTypeId">
+        <ion-note class="ion-padding-horizontal">
+          A partnership exists when two or more persons co-own a business and share in the profits and losses of the
+          business.
+        </ion-note>
+        <h4 class=" ion-text-start ion-padding-horizontal"> Owners</h4>
+      </ion-text>
+  
+      <ion-list class="ion-margin-horizontal" *ngSwitchCase="lookupUnincorporated[2].ownershipTypeId">
+        <ion-item *ngFor="let personnel of people; let i=index">
+          <ion-label>
+            <ion-text color="primary">
+              <h5>{{personnel.firstName + ' '+ personnel.lastName}}</h5>
+            </ion-text>
+            <p *ngIf="personnel.personTitles">
+              <ng-container *ngFor="let personTitle of personnel.personTitles ; let isLast=last">
+                    {{personTitle.personTitle}}{{isLast ? '' : ', '}}
+              </ng-container>
+            </p>
+          </ion-label>
+        </ion-item>
+          <ion-grid *ngIf="!_partnershipPeople.length">
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <ion-button (click)="createPartnershipProfile()">Add Ownership Profile</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-list>
+
+       <ion-note  *ngSwitchCase="lookupUnincorporated[2].ownershipTypeId" class="ion-padding-horizontal unincorporated-helpertext" >
+         Choose the + button to add a new person as owner, who does not exist in the above list.</ion-note>
+     
+      <ion-text *ngSwitchCase="lookupUnincorporated[3].ownershipTypeId">
+        <ion-note class="ion-padding-horizontal">
+          These are programs operated by School Boards, faith based programs and other non-incorporated entities.
+        </ion-note>
+        <h4 class=" ion-text-start ion-padding-horizontal"> Other Entity Details</h4>
+      </ion-text>
+  
+      <ion-list class="ion-margin-horizontal unincorporated-helpertext" *ngSwitchCase="lookupUnincorporated[3].ownershipTypeId">
+        <form *ngIf="otherEntityForm" [formGroup]="otherEntityForm">
+          <input formControlName="organizationId" name="organizationId" type="hidden" value="">
+          <input formControlName="abbreviation" name="abbreviation" type="hidden" value="">
+          <input formControlName="documentNumber" name="documentNumber" type="hidden" value="">
+          <input formControlName="fein" name="fein" type="hidden" value="">
+          <!-- <input formControlName="organizationTypeId" name="organizationTypeId" type="hidden" value=""> -->
+          <input formControlName="website" name="website" type="hidden" value="">
+          <input formControlName="isDocumentNumberValid" name="isDocumentNumberValid" type="hidden" value="">
+          <input formControlName="businessType" name="businessType" type="hidden" value="">
+  
+          <ion-grid fixed>
+  
+            <!--Name Card-->
+            <ion-row name="otherEntityForm-name" id="otherEntityForm-name">
+              <ion-col>
+                <ion-card>
+                  <ion-item>
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size-xs="12" size-md="12" class="ion-padding-start">
+                          <h2>Name & Representative</h2>
+                        </ion-col>
+                        <ion-col size-xs="12" size-md="12">
+                          <ion-item>
+                            <ion-label for="name" position="floating">Name of Entity</ion-label>
+                            <ion-input name="name" formControlName="name" inputmode="text" appFormControlValidationMsg
+                              validationMsgId='name'></ion-input>
+                          </ion-item>
+                          <ion-item>
+                            <ion-label for="representative" position="floating">Designated Representative</ion-label>
+                            <ion-input name="representative" formControlName="representative" inputmode="text"
+                              appFormControlValidationMsg validationMsgId='representative'></ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+  
+            <!--Address Card-->
+            <ion-row name="otherEntityForm-address" id="otherEntityForm-address">
+              <ion-col>
+                <ion-card>
+                  <ion-item>
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size-xs="12" size-md="3" class="ion-padding-start">
+                          <h2>Address</h2>
+                        </ion-col>
+                        <ion-col formGroupName="mainAddress" size-xs="12" size-md="9">
+                          <ion-item class="ion-no-padding">
+                            <ion-grid class="ion-no-padding">
+                              <!--hidden fields-->
+                              <ion-row>
+                                <ion-col size-xs="4" size-md="3" class="ion-text-center form-label-section">
+                                  <ion-label>
+                                    <!--hidden fields-->
+                                    <input type="hidden" name="addressTypeId" formControlName="addressTypeId"
+                                      value="mainAddressType">
+                                    <span> Physical</span>
+                                  </ion-label>
+                                </ion-col>
+                                <ion-col size-xs="8" size-md="9" class="ion-no-padding ion-col-leftborder">
+                                  <ion-item>
+                                    <ion-label for="streetAddress" position="floating">Address</ion-label>
+                                    <ion-input name="streetAddress" appFormControlValidationMsg
+                                      formControlName="streetAddress" inputmode="text" validationMsgId='streetAddress'
+                                      (ionBlur)="validateAddress()">
+                                    </ion-input>
+                                  </ion-item>
+                                  <ion-item>
+                                    <ion-label for="city" position="floating">City</ion-label>
+                                    <ion-input name="city" appFormControlValidationMsg formControlName="city"
+                                      inputmode="text" validationMsgId='city' (ionBlur)="validateAddress()"></ion-input>
+                                  </ion-item>
+                                  <ion-grid class="ion-no-padding">
+                                    <ion-row>
+                                      <ion-col size="6" class="ion-no-padding">
+                                        <ion-item>
+                                          <ion-label for="state" position="floating">State</ion-label>
+                                          <ion-input name="state" appFormControlValidationMsg formControlName="state"
+                                            inputmode="text" validationMsgId='state' (ionBlur)="validateAddress()">
+                                          </ion-input>
+                                        </ion-item>
+                                      </ion-col>
+                                      <ion-col size="6" class="ion-no-padding">
+                                        <ion-item class="ion-item-leftborder">
+                                          <ion-label for="zipCode" position="floating">Zip</ion-label>
+                                          <ion-input name="zipCode" appFormControlValidationMsg formControlName="zipCode"
+                                            inputmode="decimal" validationMsgId='zipCode' (ionBlur)="validateAddress()"
+                                            minlength="5" maxlength="5"></ion-input>
+                                        </ion-item>
+                                      </ion-col>
+                                    </ion-row>
+                                  </ion-grid>
+                                </ion-col>
+                              </ion-row>
+                            </ion-grid>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+  
+            <!--Phone Card-->
+            <ion-row name="otherEntityForm-phone" id="otherEntityForm-phone">
+              <ion-col>
+                <ion-card>
+                  <ion-item>
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size-xs="12" size-md="3" class="ion-padding-start">
+                          <h2>Phone</h2>
+                        </ion-col>
+                        <ion-col size-xs="12" size-md="9">
+                          <ion-item formGroupName="phone" class="ion-no-padding">
+                            <ion-grid class="ion-no-padding">
+                              <!--hidden fields-->
+                              <input type="hidden" formControlName="uniquePhoneId" />
+                              <ion-row>
+                                <ion-col size-xs="4" size-md="3"
+                                  class="ion-text-center ion-no-padding form-label-section">
+                                  <ion-label for="phoneNumber" class="ion-text-center">
+                                    <!--hidden fields-->
+                                    <input type="hidden" name="phoneNumberTypeId" appFormControlValidationMsg
+                                      formControlName="phoneNumberTypeId" value="landlinePhoneType">
+                                    <span> Landline</span>
+                                  </ion-label>
+                                </ion-col>
+                                <ion-col class="ion-no-padding ion-col-leftborder">
+                                  <ion-item>
+                                    <ion-label for="phoneNumber" position="floating"> </ion-label>
+                                    <ion-input name="phoneNumber" appFormControlValidationMsg inputmode="tel"
+                                      formControlName="phoneNumber" [appPhoneMask]="phoneMask" maxlength="14"
+                                      validationMsgId='phoneNumber'>
+                                    </ion-input>
+                                  </ion-item>
+                                </ion-col>
+                                <ion-col size="2" class="ion-no-padding ion-col-leftborder">
+                                  <ion-item class="ion-item-compact">
+                                    <ion-label attr.for="phoneNumberExtension" position="floating">Ext
+                                    </ion-label>
+                                    <ion-input name="phoneNumberExtension" appFormControlValidationMsg
+                                      formControlName="phoneNumberExtension" [appPhoneMask]="extensionMask" maxlength="5"></ion-input>
+                                  </ion-item>
+                                </ion-col>
+                              </ion-row>
+                            </ion-grid>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+            <!--Email Card-->
+            <ion-row name="otherEntityForm-email" id="otherEntityForm-email">
+              <ion-col>
+                <ion-card>
+                  <ion-item>
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size-xs="12" size-md="3" class="ion-padding-start">
+                          <h2>Email</h2>
+                        </ion-col>
+                        <ion-col size-xs="12" size-md="9">
+                          <ion-item formGroupName="email" class="ion-no-padding">
+                            <ion-grid class="ion-no-padding">
+                              <!--hidden fields-->
+                              <!-- <input type= "hidden" formControlName="uniqueEmailId" /> -->
+                              <ion-row>
+                                <ion-col size-xs="4" size-md="3"
+                                  class="ion-text-center ion-no-padding form-label-section">
+                                  <ion-label for="email" class="ion-text-center">
+                                    <!--hidden fields-->
+                                    <input type="hidden" name="emailAddressTypeId" formControlName="emailAddressTypeId"
+                                      value="primaryEmailType">
+                                    <span> Primary</span>
+                                  </ion-label>
+                                </ion-col>
+                                <ion-col size-xs="8" size-md="9" class="ion-no-padding ion-col-leftborder">
+                                  <ion-item>
+                                    <ion-input name="email" appFormControlValidationMsg formControlName="emailAddress"
+                                      inputmode="email" validationMsgId='email'>
+                                    </ion-input>
+                                  </ion-item>
+                                </ion-col>
+                              </ion-row>
+                            </ion-grid>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-list>
+    </ng-container>
+  </ng-container>
+</div>

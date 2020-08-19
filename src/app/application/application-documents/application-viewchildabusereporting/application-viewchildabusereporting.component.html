@@ -1,0 +1,194 @@
+<ion-grid fixed>
+  <ion-row>
+    <ion-col>
+      <ion-card class="ion-no-margin">
+        <ion-row>
+          <ion-col class="ion-no-padding">
+            <ion-item color="primary">
+              <ion-lable>{{childAbuseReportingDetails?.personName}}</ion-lable>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        
+          <ion-row class="childabuse-itemsalign">
+            <ion-col>
+              <p class=" bold documents-info">
+                All Child care personnel are mandated by law to report their suspicions of child abuse,
+                neglect, or abandonment to the Florida Abuse Hotline in accordance with s. 39.201 of the Florida
+                Statutes (F.S.).
+              </p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="childabuse-itemsalign">
+            <ion-col>
+              <ion-item lines="none">
+                <ion-grid>
+                  <ion-row class="childabuse-itemsalign">
+                    <ion-col size="1">
+                      <ion-icon name="ellipse" class="ion-icon-ellipse"></ion-icon>
+                    </ion-col>
+                    <ion-col size="11">
+                      <p>Child care personnel must be alert to the physical and behavioral indicators of child abuse and
+                        neglect. "Child abuse or Neglect" is defined in
+                        <ion-text color="primary"><a (click)="goToLink('http://www.google.com#name')" class="link">Florida Statute</a></ion-text>
+                        as "harm or threatened harm" to a child's health (mental or physical) or welfare by the acts or
+                        omissions by a parent, adult household member, other person responsible for the child's welfare,
+                        or for purposes of reporting requirements by any person.
+                      <p>
+                        <ion-label>Categories include: </ion-label>
+                      <ul class="childabuse-liststyle">
+                        <li>
+                          <p>
+                            <ion-text color="danger">Physical Abuse or Neglect</ion-text><br>
+                            (i.e. unexplained bruises, hunger, lack of supervision...)
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <ion-text color="danger">Emotional Abuse or Neglect</ion-text><br>
+                            (i.e. impairment in the ability to function, depression...)
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <ion-text color="danger">Sexual Abuse</ion-text><br>
+                            (i.e. withdrawl, excessive crying, physical symptoms...)
+                          </p>
+                        </li>
+                      </ul>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="childabuse-itemsalign">
+                    <ion-col size="1">
+                      <ion-icon name="ellipse" class="ion-icon-ellipse"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                      <p>Failure to perform duties of a mandatory reporter pursuant to s. 39.201, F.S. constitutes a
+                        violation of the standards in ss. 402.301-319, F.S. and is a felony of the third degree.
+                        Remember,
+                        it is each child care personnel's responsibility to report suspected abuse and/or neglect.</p>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="childabuse-itemsalign">
+                    <ion-col size="1">
+                      <ion-icon name="ellipse" class="ion-icon-ellipse"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                      <p>All reports are confidential. However, persons who are mandated reporters (child care
+                        personnel)
+                        are
+                        required to give their name when making a report.</p>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="childabuse-itemsalign">
+                    <ion-col size="1">
+                      <ion-icon name="ellipse" class="ion-icon-ellipse"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                      <p>It is important to give as much identifying and factual information as possible when making
+                        report.</p>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col size="1">
+                      <ion-icon name="ellipse" class="ion-icon-ellipse"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                      <p>Any person, when acting in good faith, is immune from liability in accordance with s.
+                        39.203(1)(a), F.S.</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="childabuse-itemsalign">
+            <ion-col>
+              <p class="documents-info">
+                For more information about child abuse and neglect, visit the Department's website at
+                www.myflfamilies.com/childcare
+                and select "Training & Credentialing." The Department offers a 4-hour identifying and Reporting Child
+                Abuse and
+                Neglect course for child care providers. This course is an overview of the various types of abuse and
+                neglect,
+                indicators that may be observed, the legal responsibility of mandatory reporters, and the proper
+                procedure
+                for
+                reporting abuse and neglect, as required by ss. 402.305(2) and 402.313(1), F.S. The course is offered
+                both
+                online
+                and instructor-based throughout Florida.
+              </p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <p class="documents-info">
+                <ion-text color="danger">
+                  Report must be made immediately to the Florida Abuse Hotline Information Sytem By
+                </ion-text>
+              </p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="documents-info">
+            <ion-col size="1">
+              <ion-icon name="call" size="small"></ion-icon>
+            </ion-col>
+            <ion-col>1-800-96-ABUSE (1-800-962-2873)</ion-col>
+          </ion-row>
+
+          <ion-row class="documents-info">
+            <ion-col size="1">
+              <ion-icon name="receipt" size="small"></ion-icon>
+            </ion-col>
+            <ion-col> 1-800-914-0004</ion-col>
+          </ion-row>
+
+          <ion-row class="documents-info">
+            <ion-col size="1">
+              <ion-icon name="globe" size="small"></ion-icon>
+            </ion-col>
+            <ion-col> www.dcf.state.fl.us/abuse/report</ion-col>
+          </ion-row>
+        
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <!-- Full Name and Date Controls -->
+  <ion-row class="ion-padding-vertical">
+    <ion-col>
+      <ion-card class="ion-no-margin">
+        <ion-grid>
+
+          <ion-row>
+            <ion-col class="ion-no-margin" size="12">
+              <ion-list>
+                <ion-item>
+                  <ion-text *ngIf="childAbuseReportingDetails !== null" position="floating">{{ childAbuseReportingDetails?.formSignedBy }}</ion-text>
+                  <ion-text *ngIf="childAbuseReportingDetails === null " position="floating">Full Name</ion-text>
+                </ion-item>
+                <ion-item>
+                  <ion-text *ngIf="childAbuseReportingDetails?.formSignedDate !== null">{{childAbuseReportingDetails?.formSignedDate | date: 'MM/dd/yyyy'}}</ion-text>
+                  <ion-text *ngIf="childAbuseReportingDetails?.formSignedDate === null" >{{showCurrentDate}}</ion-text>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+
+      <ion-note class="childabuse-helpertext">
+        By typing my name above, I am electronically signing my attestation
+      </ion-note>
+
+    </ion-col>
+  </ion-row>
+</ion-grid>

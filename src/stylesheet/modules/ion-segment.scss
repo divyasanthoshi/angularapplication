@@ -1,0 +1,37 @@
+@import '../config';
+
+::ng-deep ion-segment{
+    height: 150px;
+    padding: 3px;
+    --background: var(--ion-color-primary-contrast);
+    border:1.5px solid rgba(173,181,252, 0.5);
+    
+    ion-segment-button {
+        padding: 0px;
+        margin: 1px;
+        --border-color: var(--ion-color-primary-contrast);
+        --border-radius: 5px;
+        --color-checked: var(--ion-color-primary-contrast);
+         --background: var(--ion-color-primary-contrast);
+        --color: var(--ion-color-medium);
+        --indicator-color: var(--ion-color-primary);
+  }
+}
+
+::ng-deep .togglesegment{
+      ion-segment{
+        height:50px;
+        --background: var(--ion-color-light-shade);
+        border:none
+    }
+  
+    ion-segment-button {
+        padding: 0px;
+        margin: 1px;
+        --border-radius: 4px;
+        --color-checked: var(--ion-color-primary);
+        --background: var(--ion-color-light-shade);
+        --color: var(--ion-color-medium);
+        --indicator-color: var(--ion-color-primary-contrast);
+    }
+  }

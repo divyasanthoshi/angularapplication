@@ -1,0 +1,48 @@
+<ion-content>
+
+  <ion-label>Identity Provider</ion-label>
+  <ion-button expand="block" (click)="createUserToken()">create User Token - Step 1 of 4 [OK]</ion-button>
+  <ion-button expand="block" (click)="reNewUserToken()">reNew User Token - Step 2 of 4 [OK]</ion-button>
+  <ion-button expand="block" (click)="getUserClaim()">get User Claim - Step 3 of 4 [OK]</ion-button>
+  <ion-button expand="block" (click)="revokeUserToken()">revoke User Token - Step 4 of 4 [OK]</ion-button>
+  <ion-label>Weather</ion-label>
+  <ion-button expand="block" (click)="getAllWeather()">get All Weather [OK]</ion-button>
+  <ion-button expand="block" (click)="getWeather()">get Weather [OK]</ion-button>
+  <ion-button expand="block" (click)="postWeather()">post Weather [OK]</ion-button>
+  <ion-button expand="block" (click)="putWeather()">put Weather [OK]</ion-button>
+  <ion-button expand="block" (click)="deleteWeather()">delete Weather [OK]</ion-button>
+  <ion-label>Form</ion-label>
+  <ion-button expand="block" (click)="getFormLookup()">get Form Lookup [OK]</ion-button>
+  <ion-button expand="block" (click)="getFormDetailUserId()">get Form Detail UserId [OK]</ion-button>
+  <ion-button expand="block" (click)="updateFormArchive()">update Form Archive [OK]</ion-button>
+  <ion-button expand="block" (click)="getFormDetailFormId()">get Form Detail FormId [OK]</ion-button>
+  <ion-label>Intent</ion-label>
+  <ion-button expand="block" (click)="getIntentLookup()">get Intent Lookup [OK]</ion-button>
+  <ion-button expand="block" (click)="updateIntentStatus()">update Intent Status [OK]</ion-button>
+  <ion-label>Ownership</ion-label>
+  <ion-button expand="block" (click)="getOwnershipDocumentNumber()">get Ownership Document Number [OK]</ion-button>
+  <ion-button expand="block" (click)="getOwnershipDetail()">get Ownership Detail [OK]</ion-button>
+  <ion-button expand="block" (click)="insertUpdateOwnershipDetail()">insert / Update Ownership Detail [Pending]</ion-button>
+  <ion-label>OnHoldPerson</ion-label>
+  <ion-button expand="block" (click)="insertUpdateOnHoldPerson()">insert / Update OnHold Person [Pending]</ion-button>
+  <ion-button expand="block" (click)="getOnHoldPerson()">get OnHold Person [OK]</ion-button>
+  <ion-button expand="block" (click)="deleteOnHoldPerson()">delete OnHold Person [OK]</ion-button>
+  <ion-label>OnHoldProvider</ion-label>
+  <ion-button expand="block" (click)="insertUpdateOnHoldProvider()">insert / Update OnHold Provider [Pending]</ion-button>
+  <ion-button expand="block" (click)="getProviderOnHoldProvider()">get Provider OnHold Provider [OK]</ion-button>
+  <ion-label>Questionnaire</ion-label>
+  <ion-button expand="block" (click)="getQuestionnaireLookup()">get Questionnaire Lookup [OK]</ion-button>
+  <ion-button expand="block" (click)="getQuestionnaireRecommendation()">get Questionnaire Recommendation [OK]</ion-button>
+  <ion-label>Share</ion-label>
+  <ion-button expand="block" (click)="getAddress()">get Address [OK]</ion-button>
+
+  <ion-label>User Manager</ion-label>
+  <ion-button expand="block" (click)="signIn()">SignIn</ion-button>
+  <ion-button expand="block" (click)="signOut()">Signout</ion-button>
+  <ion-button expand="block" (click)="isSignedIn()">Is SignedIn</ion-button>
+
+  <ion-label>Result</ion-label>
+  <div *ngIf="result$">
+      {{result$ | async | json}}
+  </div>
+</ion-content>

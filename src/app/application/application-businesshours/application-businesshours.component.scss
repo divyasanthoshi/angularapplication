@@ -1,0 +1,71 @@
+@import '../../../stylesheet/config';
+ion-card {
+  padding: 6px 0px;
+  max-width:425px;
+}
+
+.businesshours-fromtillmargin{
+  margin-bottom:-17px;
+  margin-top: 10px;
+}
+
+.businesshours-daygroup{
+  margin-right: -50px;
+  margin-left: 10px;
+}
+.businesshours-dayposition{
+  margin-top: 24px;
+}
+
+.businesshours-daylabel{
+  color: var(--ion-color-secondary-contrast);
+}
+.businesshours-timeslotgroup{
+  padding: 6px 0px;
+}
+
+.businesshours-timeslot{
+  padding: 2px 2px;
+}
+
+.businesshours-timeinput {
+  margin-left: 0px;
+  font-size:0.9em;
+}
+
+.businesshours-timeslotborder {
+  border: 2px solid rgba(215, 216, 218, 0.5);
+  border-radius: 5px;
+  padding-top: 2px;
+}
+
+ion-note {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0px;
+  font-size: 1em;
+}
+
+.businesshours-menuicon {
+  font-size: 1.5em;
+  color: var(--ion-color-medium-shade);
+  cursor: pointer;
+  margin-top: 19px;
+}
+.businesshours-errortimeslot{
+  border: 1px solid darken($ion-color-danger-tint, 25%);
+}
+.businesshours-closedmenuicon{
+  font-size: 1.5em !important;
+  color: var(--ion-color-medium-shade);
+  cursor: pointer;
+  margin-top: 25px;
+  margin-left: 22px;
+}
+
+.businesshours-closedlabel{
+  margin-right: -30px;
+  margin-top: 11px;
+  padding: 0px;
+}
+

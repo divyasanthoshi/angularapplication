@@ -1,0 +1,70 @@
+.empdetails-jobdutiesborder{
+    border:1px solid var(--ion-color-light-shade);
+}
+
+.empdetails-no-innerpadding-end{
+    --inner-padding-end: 0px !important;
+    
+}
+
+.empdetails-no-innerpadding-start{
+    --padding-start: 0px !important;
+
+}
+
+.empdetails-cardmargin-top{
+    margin-top:5px;
+}
+.empdetails-emstatuscard{
+    margin-top:12px;
+    margin-right:4px;
+    margin-bottom:5px;
+}
+
+.empdetails-cardmargin-right{
+    margin-right:5px
+}
+
+.empdetails-paddingbottom{
+    padding-bottom:6px;
+}
+
+::ng-deep .ion-select-max-height {
+    .alert-radio-group {
+         max-height: 100%;
+         }
+   }
+   .ion-padding-top-small{
+       padding-top:10px;
+   }
+
+   .employmentDetails-custom-margin{
+       margin-left:-4px;
+       margin-right:5px;
+
+   }
+   .employmentDetails-custom-padding{
+   position: absolute;
+    right: 0px;
+    top: 29px;
+   }
+
+   .ion-padding-bottom-small{
+       padding-bottom:9px;
+   }
+ 
+
+.selected{
+    --color-checked: var(--ion-color-primary);
+}
+
+
+// .custom-width{
+//     min-width:100%;
+// }
+
+
+
+
+
+

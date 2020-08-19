@@ -1,0 +1,38 @@
+<ion-card class="ion-text-center">
+  <ion-card-header>
+      <ion-card-title @slideInOut *ngIf="isShow">Sick Children</ion-card-title>
+      <ion-card-subtitle>Plan to provide care for children with illness / disability?</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content @fadeInOut *ngIf="isShow">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" class="ion-text-center">
+            <img class="ion-card-icon-legend" src = "./../../assets/images/sickchildren.svg"/>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="2">
+        </ion-col>
+        <ion-col size="8">
+          <form [formGroup]="disabledFormGroup">
+          <ion-list>
+              <ion-radio-group formControlName="disabledChildren" appFormControlValidationMsg validationMsgId='disabledChildren'>                  
+                <ion-item lines="none" (click)="clickRadio(true)">
+                  <ion-label>Yes</ion-label>
+                  <ion-radio slot="start" name="choice" value="true" ></ion-radio>
+                </ion-item>
+            
+                <ion-item lines="none" (click)="clickRadio(false)">
+                  <ion-label>No</ion-label>
+                  <ion-radio slot="start" name="choice" value="false" ></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+            </form>
+        </ion-col>
+        <ion-col size="2">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

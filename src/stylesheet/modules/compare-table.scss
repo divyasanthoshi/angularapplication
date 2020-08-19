@@ -1,0 +1,81 @@
+@import "../config";
+
+
+$ion-card-legend-width: auto;
+$ion-card-legend-height: auto;
+::ng-deep .comparetable {
+    ion-card {
+        margin-top: 5px;
+        padding: 5px !important;
+        width: $ion-card-legend-width;
+        height: $ion-card-legend-height;
+    }
+
+    .border-table {
+        border: 1px solid lightgray;
+    }
+
+    .noborder{
+        border-top-style:none;
+        border-bottom-style:none;
+        border-right-style: solid;
+        border-right-color: lightgray;
+        border-right-width: 1px;
+        border-left-style: solid;
+        border-left-color: lightgray;
+        border-left-width: 1px;
+    }
+
+    .iconoptions {
+        padding: 0 15px;
+
+        .icon-round {
+            border-radius: 100%;
+            padding: 0.14em;
+
+            &.large {
+                font-size: 3.5em;
+            }
+            &.selected {
+                background-color: var(--ion-color-primary);
+                color: var(--ion-color-primary-contrast);
+            }
+        }
+    }
+
+    ion-segment {
+        height: fit-content !important;
+        padding: 20px;
+        --background: rgba(159, 174, 249, 0.5);
+        border: none;
+    }
+
+    .icon-position {
+        margin-bottom: -3px;
+        margin-right: 4px;
+    }
+
+    .overflow {
+        overflow: auto;
+    }
+
+    .min-width-400 {
+        min-width: 470px;
+    }
+
+    .min-width-1000 {
+        min-width: 1320px;
+    }
+
+    
+    .link-content:hover {
+        cursor: pointer;
+    }
+    .label-position{
+        position: absolute;
+    }
+
+    .details-align{
+        padding-bottom:11px;
+    }
+}

@@ -1,0 +1,41 @@
+<ion-grid class="list">
+  <ion-row class="divider">
+    <ion-col size="12">
+      <div class="ion-text-center ion-hide-md-up" *ngIf="form && formLookups">
+        <div>{{formLookups?.lookupFormType | lookupvalue: form?.formTypeId :'formTypeId'}}</div>
+        <div class="providerdetails">{{form?.providerName}} @ {{form?.providerAddress?.streetAddress}} ,
+          {{form?.providerAddress?.city}}</div>
+      </div>
+      <div class="ion-hide-sm-down ion-text-center ion-padding-top">
+        <ion-label color="primary"><b>Tracking # </b></ion-label>
+        <span>{{form?.trackingNumber.toString() | slice:0:4}}-{{form?.trackingNumber.toString() | slice:4:8}}</span>
+      </div>
+      <ion-button expand="block" color="white" class="btn-bordercolor"
+        (click)="reviewApplication(form?.formId, form?.providerId)">
+        <span>Review Application</span>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="scrollable">
+    <div class="formsstatuslist">
+      <ul class="statuslist">
+        <li *ngFor="let item of getStatusList(form, formLookups?.lookupFormStatus); trackBy: trackByMethod">
+          <div class="sidearrow">
+            <div class="formstimestamp fadetext" *ngIf="item?.statusDate">
+              {{item?.statusDate | date: 'dd MMMM yyyy'}}<br> {{item?.statusDate | date: 'hh:mm a'}}
+            </div>
+          </div>
+          <div
+            [ngClass]="{'formsstatus': !item?.statusDate || item?.statusDate, 'forms-currentstatus' : isMostRecent(item?.statusDate) }">
+            <div [ngClass]="{'formsstatus-active ': item?.statusDate,
+                          'formsstatus-deactive': !item?.statusDate,
+                          'forms-currentstatushighlighted': isMostRecent(item?.statusDate)}"></div>
+          </div>
+          <div class="item-title bold">
+            {{item?.formStatusId | forms: formLookups?.lookupFormStatus: 'formStatusId' : 'formStatus'}}</div>
+        </li>
+      </ul>
+    </div>
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,317 @@
+<form [formGroup]="personnelProfileForm" *ngIf="personnelProfileForm" novalidate>
+  <!-- Form Hidden Fields -->
+  <input type='hidden' formControlName="personId" />
+  <input type='hidden' formControlName="providerId" />
+
+  <ion-grid fixed>
+
+    <!-- Name Card -->
+    <ion-row name="personnelprofile-name" id="personnel-name">
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-md="2">
+                  <h2>Name</h2>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10">
+                  <ion-item>
+                    <ion-label for="name" position="floating">Full Name</ion-label>
+                    <ion-input name="name" formControlName="name" inputmode="text" appFormControlValidationMsg 
+                      validationMsgId='name' [value]="personnelProfileForm.get('name').value | titlecase">
+                    </ion-input>
+                  </ion-item>
+                  <ion-item class="personelprofile-iondatefocus">
+                    <ion-label for="dob" position="floating">Date of birth</ion-label>
+                    <ion-datetime displayFormat="YYYY/MM/DD" name="dob" formControlName="dob"></ion-datetime>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label for="ssn" position="floating">Social Security Number</ion-label>
+                    <ion-input name="ssn" formControlName="ssn" inputmode="numeric" maxlength="12"  [appPhoneMask] ="ssnMask" 
+                      appFormControlValidationMsg validationMsgId='ssn'>
+                    </ion-input>
+                  </ion-item>
+                  <ion-note>SSN is used for background screening purposes. Incorrect SSN will delay
+                    the verification and licensing approval process.</ion-note>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!-- Role Card -->
+    <ion-row name="personnelprofile-role" id="personnel-role">
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-md="2">
+                  <h2>Title</h2>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10">
+                  <ion-item (click)="selectPersonTitles()">
+                     <input name="roles" hidden formControlName="personTitles" appFormControlValidationMsg validationMsgId='personTitles'  />
+                     <ion-input name="displayroles"  placeholder="Select Role(s)" readonly [ngModel]="displayPersonTitle" [ngModelOptions]="{standalone: true}"></ion-input>
+                     <ion-icon name="chevron-forward-outline"></ion-icon>
+                  </ion-item>
+                  <ion-note>How is this person related to Business?</ion-note>
+                </ion-col>                                           
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!-- Address Card -->
+    <ion-row name="personnelprofile-address" id="personnelprofile-address">
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row class="ion-card-customspacing">
+                <ion-col size-xs="12" size-md="2">
+                  <h2>Address</h2>
+                </ion-col>
+                <ion-col formArrayName="addresses" size-xs="12" size-md="10" 
+                  *ngFor="let item of personnelProfileForm.get('addresses')['controls']; let i=index">
+                  <ion-item [formGroupName]="i">
+                    <!--hidden fields-->
+                    <input type='hidden' formControlName="addressId" />
+                    <input type='hidden' formControlName="counties" />
+                    <input type='hidden' formControlName="selectedCountyId" />
+                    <input type='hidden' formControlName="uspsBarcode" />
+                    <ion-grid class="ion-no-padding forall">
+                      <ion-row>
+                        <ion-col size-xs="4" size-md="3" class="form-label-section">
+                          <ion-item lines="none">
+                            <ion-select name="addressTypeId" formControlName="addressTypeId"
+                              [interfaceOptions]="setActionSheetHeader('Select Address Type')" interface="action-sheet"
+                              multiple="false" placeholder="Select" [value]="4">
+                              <ion-select-option *ngFor="let addressType of applicationLookups?.lookupAddressType"
+                                [value]="addressType.addressTypeId">{{addressType.description}}</ion-select-option>
+                            </ion-select>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size-xs="8" size-md="9" class="ion-col-leftborder">
+                          <ion-item>
+                            <ion-label for="streetAddress" position="floating">Address</ion-label>
+                            <ion-input name="streetAddress" formControlName="streetAddress" inputmode="text"
+                              appFormControlValidationMsg validationMsgId='streetAddress'
+                              (ionBlur)="validateAddress()">
+                            </ion-input>
+                          </ion-item>
+                          <ion-item>
+                            <ion-label for="city" position="floating">City</ion-label>
+                            <ion-input name="city" formControlName="city" inputmode="text" appFormControlValidationMsg
+                              validationMsgId='city' (ionBlur)="validateAddress()">
+                            </ion-input>
+                          </ion-item>
+                          <ion-grid class="ion-no-padding forall">
+                            <ion-row>
+                              <ion-col>
+                                <ion-item>
+                                  <ion-label for="state" position="floating">State</ion-label>
+                                  <ion-input name="state" formControlName="state" inputmode="text"
+                                    appFormControlValidationMsg validationMsgId='state' (ionBlur)="validateAddress()">
+                                  </ion-input>
+                                </ion-item>
+                              </ion-col>
+                              <ion-col>
+                                <ion-item class="ion-item-leftborder">
+                                  <ion-label for="zipCode" position="floating">Zip</ion-label>
+                                  <ion-input name="zipCode" formControlName="zipCode" inputmode="numeric"
+                                    appFormControlValidationMsg validationMsgId='zipCode' minlength="5" maxlength="5"
+                                    (ionBlur)="validateAddress()"></ion-input>
+                                </ion-item>
+                              </ion-col>
+                            </ion-row>
+                          </ion-grid>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!-- phone card -->
+    <ion-row name="personnelprofile-phone" id="personnelprofile-phone">
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-md="2">
+                  <h2>Phone</h2>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10">
+                  <ion-item formArrayName="phones" class="ion-no-padding"
+                    *ngFor="let phone of phones.controls; let i=index">
+                    <ion-grid [formGroupName]="i" class="ion-no-padding forall">
+                      <!--hidden fields-->
+                      <input type="hidden" formControlName="uniquePhoneId" />
+                      <ion-row>
+                        <ion-col size-xs="4" size-md="2" class="form-label-section">
+                          <ion-label *ngIf="i === 0" attr.for="{{'phoneNumber' + i}}">
+                            <!--hidden fields-->
+                            <input type="hidden" name="{{'phoneNumberTypeId' + i}}" appFormControlValidationMsg
+                              formControlName="phoneNumberTypeId" value="{{cellPhoneType}}" />
+                            <span> Cell </span>
+                          </ion-label>
+                          <ng-container *ngIf="i !== 0">
+                            <ion-icon class="ion-icon-clickable" color="danger" name="remove-circle"
+                              (click)="removePhoneFormGroup(i)"></ion-icon>
+                            <ion-item lines="none">
+                              <ion-select name="{{'phoneNumberTypeId' + i}}" formControlName="phoneNumberTypeId"
+                                [interfaceOptions]="setActionSheetHeader('Select Phone Type')" interface="action-sheet"
+                                multiple="false" placeholder="Select">
+                                <ion-select-option *ngFor="let phoneType of applicationLookups.lookupPhoneType"
+                                  [value]="phoneType.phoneNumberTypeId">{{phoneType.description}}</ion-select-option>
+                              </ion-select>
+                            </ion-item>
+                          </ng-container>
+                        </ion-col>
+                        <ion-col size-xs="8" size-md="10" class="ion-col-leftborder">
+                          <ion-item>
+                            <ion-input name="{{'phoneNumber' + i}}" formControlName="phoneNumber" inputmode="tel"
+                              [appPhoneMask]="phoneMask" maxlength="14" appFormControlValidationMsg
+                              validationMsgId='phoneNumber'>
+                            </ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10" push-md="2" *ngIf="phones.controls.length <2" class="form-optional-label">
+                  <ion-item lines="none" class="ion-item-slot" (click)="addPhoneFormGroup($event)">
+                    <ion-icon slot="start" name="add-circle" color="success"></ion-icon>
+                    <span>Add Phone</span> <span class="fadetext">&nbsp;(Optional) </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!-- Email Card -->
+    <ion-row name="personnelprofile-email" id="personnelprofile-email">
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-md="2">
+                  <h2>Email</h2>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10">
+                  <ion-item formArrayName="emails" class="ion-no-padding"
+                    *ngFor="let email of emails.controls; let i=index">
+                    <ion-grid [formGroupName]="i" class="ion-no-padding forall">
+
+                      <!--hidden fields-->
+                      <input type='hidden' formControlName="uniqueEmailId" />
+                      <ion-row>
+                        <ion-col size-xs="4" size-md="2" class="form-label-section">
+                          <ion-label *ngIf="i === 0" attr.for="{{'email' + i}}">
+                            <!--hidden fields-->
+                            <input type="hidden" name="{{'emailAddressTypeId' + i}}"
+                              formControlName="emailAddressTypeId" value="{{primaryEmailType}}">
+                            <span> Primary</span>
+                          </ion-label>
+                          <ng-container *ngIf="i !== 0">
+                            <ion-icon class="ion-icon-clickable" color="danger" name="remove-circle"
+                              (click)="removeEmailFormGroup(i)"></ion-icon>
+                            <ion-item lines="none">
+                              <ion-select name="{{'emailAddressTypeId' + i}}" formControlName="emailAddressTypeId"
+                                interface="action-sheet" multiple="false" placeholder="Select"
+                                [interfaceOptions]="setActionSheetHeader('Select Email Type')">
+                                <ion-select-option *ngFor="let emailType of applicationLookups.lookupEmailAddressType"
+                                  [value]="emailType.emailAddressTypeId">{{emailType.description}}</ion-select-option>
+                              </ion-select>
+                            </ion-item>
+                          </ng-container>
+                        </ion-col>
+                        <ion-col size-xs="8" size-md="10" class="ion-col-leftborder">
+                          <ion-item>
+                            <ion-input name="{{'email' + i}}" formControlName="emailAddress" inputmode="email"
+                              appFormControlValidationMsg validationMsgId='email'></ion-input>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10" push-md="2" *ngIf="emails.controls.length <2"  class="form-optional-label">
+                  <ion-item lines="none" class="ion-item-slot" (click)="addEmailFormGroup($event)">
+                    <ion-icon slot="start" name="add-circle" color="success"></ion-icon>
+                    <span>Add Email</span> <span class="fadetext">&nbsp;(Optional) </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!--Driver License Card-->
+    <ion-row name="personnelprofile-driverlicense" id="personnel-driverlicense">
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-grid>
+              <ion-row class="ion-card-customspacing">
+                <ion-col size-xs="12" size-md="2">
+                  <h2>Driver's License <span class="fadetext">(Optional)</span></h2>
+                </ion-col>
+                <ion-col size-xs="12" size-md="10">
+                  <ion-grid class="ion-no-padding forall">
+                    <ion-row>
+                      <ion-col size="12">
+                        <ion-item>
+                          <ion-label for="driverLicense" position="floating">License Number</ion-label>
+                          <ion-input name="driverLicense" formControlName="driverLicense" inputmode="text"
+                            minlength="personnelProfileForm?.controls?.driverLicenseState?.value === 'FL' ? 13 : 6"
+                            max="personnelProfileForm?.controls?.driverLicenseState?.value === 'FL' ? 13 : 19"
+                            appFormControlValidationMsg validationMsgId='dlnumber' [value]="personnelProfileForm?.get('driverLicense').value | uppercase" >
+                          </ion-input>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col size="4">
+                        <ion-item>
+                          <ion-label for="driverLicenseState" position="floating">State</ion-label>
+                          <ion-input name="driverLicenseState" formControlName="driverLicenseState" inputmode="text"
+                            appFormControlValidationMsg validationMsgId='dlstate' [value]= "personnelProfileForm.get('driverLicenseState').value | uppercase">
+                          </ion-input>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col size="8">
+                        <ion-item class="ion-item-leftborder personelprofile-iondatefocus">
+                          <ion-label for="driverLicenseExpiryDate" position="floating">Expiration Date</ion-label>
+                          <ion-datetime max="2030" displayFormat="YYYY/MM/DD" name="driverLicenseExpiryDate" type="date" formControlName="driverLicenseExpiryDate" [pickerOptions]="customPickerOptions" appFormControlValidationMsg validationMsgId='dlexpirationdate'>
+                          </ion-datetime>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>

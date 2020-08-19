@@ -1,0 +1,33 @@
+@import '../config';
+
+::ng-deep .ion-list-detail{
+
+    ion-grid{
+        width:100%;
+    }
+    .text-area {
+        font-size: 0.8em;
+    }
+
+    .archiveBtn{
+        label{
+          margin:auto; 
+          font-size: 0.8em;
+          margin-top: -6px;
+          margin-left: 1px;
+          display: block;
+          color:var(--ion-color-primary);
+    }
+      display: none;
+      
+    }
+    .selected .archiveBtn {
+        display: block;
+      }
+
+      
+    ion-badge.ion-badge-sub{
+        padding:6px;
+        margin-top: 7px;
+    }
+}

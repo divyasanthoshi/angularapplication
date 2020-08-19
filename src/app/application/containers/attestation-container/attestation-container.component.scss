@@ -1,0 +1,12 @@
+.fabbutton-fixed {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+ 
+@media(min-width: 1024px) {
+    .fabbutton-fixed {
+    bottom: 1.5rem;
+    right: 1.5rem;
+}
+}

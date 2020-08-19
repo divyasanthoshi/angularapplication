@@ -1,0 +1,49 @@
+<ion-grid fixed class="fullheight ion-no-padding">
+    <ion-row class="fullheight">
+        <ion-col size-md="4" class="ion-hide-md-down ion-no-padding">
+            <app-application-employmenthistory [employmentHistory]="employmentHistory$ | async"
+                (view)="viewEmploymentDetails($event)" (create)="createEmploymentDetail($event)">
+            </app-application-employmenthistory>
+            <ion-grid class="ehview-addbtn">
+                <ion-row>
+                    <ion-col *ngIf="employmentDetailsCount > 0">
+                        <ion-button expand="full" color="white" class="btn-bordercolor"
+                            (click)="createEmploymentDetails()">
+                            <span>Add</span>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-col>
+        <ion-col size-xs="12" size-md="8" class="ion-no-padding">
+            <ion-grid>
+                <ion-row>
+                    <ion-col class="viewemphistory-attach">
+                        <app-shared-attachment [attachmentCount]="attachmentCount"></app-shared-attachment>
+                        <ion-note class="ion-padding-horizontal"><span class="bold ehview-helpertextoptional">Optional:</span>
+                            Optional: Attach documents that supplement the employement history (Example: Reference
+                            letter, letter of appreciation etc.) </ion-note>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-padding-top">
+                    <ion-col>
+                        <app-application-viewemploymentdetails
+                            [currentViewEmploymentDetail]="currentViewEmploymentDetail$ | async"
+                            [applicationLookups]="applicationLookups$ | async">
+                        </app-application-viewemploymentdetails>
+                        <ion-row class="ion-padding">
+                            <ion-fab vertical="bottom" horizontal="end" class="fabbutton-fixed">
+                                <ion-fab-button (click)="editEmploymentDetail()">
+                                    <ion-icon name="pencil"></ion-icon>
+                                </ion-fab-button>
+                            </ion-fab>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+
+        </ion-col>
+    </ion-row>
+</ion-grid>

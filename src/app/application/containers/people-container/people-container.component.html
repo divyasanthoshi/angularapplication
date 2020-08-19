@@ -1,0 +1,57 @@
+<ion-grid fixed class="fullheight">
+    <ion-row class="fullheight">
+        <ion-col>
+            <ion-row class="fullheight">
+                <ion-col [ngClass]="{'peoplelist-listwidth': peopleCount>0}">
+                    <div class="ion-hide-md-down">
+                        <app-application-people [peopleList]="peopleList$ | async"
+                            [currentPersonnelId]="currentPersonId$ | async"
+                            (selectPersonnel)="setCurrentPersonnel($event)" (create)="createPersonnel()"
+                            (view)="viewPersonnel($event)" (edit)="editPersonnel($event)"
+                            (delete)="deletePerson($event)">
+                        </app-application-people>
+                    </div>
+ 
+                    <div class="ion-hide-md-up">
+                        <app-application-people [peopleList]="peopleList$ | async"
+                            [currentPersonnelId]="currentPersonId$ | async" (selectPersonnel)="viewPersonnel($event)"
+                            (create)="createPersonnel()" (edit)="editPersonnel($event)" (delete)="deletePerson($event)">
+                        </app-application-people>
+                        </div>
+                    </ion-col>
+                <ion-col size-md="7" class="ion-hide-md-down" *ngIf="peopleCount > 0">
+                    <div>
+                        <app-application-viewpersonnel [currentViewPersonnel]="currentPersonnel$ | async"
+                            [applicationLookup]="applicationLookup$ | async">
+                        </app-application-viewpersonnel>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-grid fixed>
+                        <ion-row>
+                            <ion-col size-xs="6" size-md="3" offset-md="3">
+                                <ion-button fill="outline" expand="block" [routerLink]="previousUrl"
+                                    queryParamsHandling="preserve">
+                                    Back
+                                </ion-button>
+                            </ion-col>
+                            <ion-col size-xs="6" size-md="3">
+                                <ion-button expand="block" id="nextbutton" (click)="nextPage()">
+                                    Next: Documents
+                                    <ion-icon slot="end" name="caret-forward"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-col>
+            </ion-row>
+            <ion-fab *ngIf="peopleCount > 0" vertical="bottom" horizontal="end" class="fabbutton-fixed">
+                <ion-fab-button (click)="createPersonnel()">
+                    <ion-icon name="add"></ion-icon>
+                </ion-fab-button>
+            </ion-fab>
+        </ion-col>
+    </ion-row>
+</ion-grid>

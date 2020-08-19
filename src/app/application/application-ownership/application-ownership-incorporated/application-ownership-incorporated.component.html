@@ -1,0 +1,61 @@
+<ion-text>
+  <h4 class="ion-text-start ion-padding-horizontal">Find By Document Number</h4>
+</ion-text>
+
+<ion-card color="primary" class="ion-margin-horizontal">
+  <ion-card-content >
+    <ion-searchbar #incorporatedSearchbar inputmode="search" class="ion-text-left"></ion-searchbar>
+  </ion-card-content>
+</ion-card>
+
+  <ion-note class="ion-padding-horizontal">This is a 6 or 12 digit number assigned by the Florida division of Corporations when your business was incorporated.</ion-note>
+
+<ng-container *ngIf="_ownership?.organization" >
+    <h4 class="ion-text-start ion-padding-horizontal">Incorporation Details</h4>
+    <ion-note class="ion-padding-horizontal"> Below are the details we found from Florida Division of Corporations for the
+      Document Number . If the information is not accurate, please visit SunBiz.org to update.</ion-note>
+  <ion-card class="ion-margin-horizontal">
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Document Number</ion-label>
+        <ion-input [value]="_ownership.organization.documentNumber" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Entity Name</ion-label>
+        <ion-input [value]="_ownership.organization.name" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Primary Address</ion-label>
+        <ion-input [value]="removeExtraSpaces(_ownership.organization.mainAddress | fulladdress)" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Status</ion-label>
+        <ion-input [value]="_ownership.organization.status" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Federal Employee ID (FEIN)</ion-label>
+        <ion-input [value]="_ownership.organization.fein | mask: 'NN-NNNNNNN'" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Business Type</ion-label>
+        <ion-input [value]="_ownership.organization.businessType"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Main Phone</ion-label>
+        <ion-input [value]="_ownership.organization.phone?.phoneNumber | phone:'US'" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Designated Represetative</ion-label>
+        <ion-input [value]="_ownership.organization.representative" readonly></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ng-container>
+
+<ion-grid  class="ion-padding-horizontal">
+  <ion-row>
+    <ion-col size="12" class="btn-align" >
+      <ion-button class="fullwidth" expand="block" (click)="seachDocNum()"> Find </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

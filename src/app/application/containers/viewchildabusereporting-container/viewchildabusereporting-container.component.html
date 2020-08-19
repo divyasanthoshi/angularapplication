@@ -1,0 +1,73 @@
+<ion-grid fixed class="fullheight ion-no-padding">
+  <ion-row class="fullheight">
+      <ion-col size-md="4" class="ion-hide-md-down">
+        <app-shared-documents-people [formTypeId]="formTypeId" [documentsPeople]="peopleDocuments$ | async"
+          (navigateToPeopleForm)="navigateToPeopleForm($event)">
+        </app-shared-documents-people>
+      </ion-col>
+      <ion-col size-xs="12" size-md="8"class="ion-no-padding">
+          <ion-grid>
+              <ion-row>
+                  <ion-col>
+                    <app-shared-attachment [attachmentCount]="(childAbuseReportingDetails$ | async)?.attachmentCount">
+                    </app-shared-attachment>
+                    <ion-note class="ion-padding-horizontal"><span class="bold canr-helpertextoptional">Optional:</span>
+                      Attach documents that supplement Attestation of Child Abuse Reporting </ion-note>
+              </ion-col>
+          </ion-row>
+
+          <ion-row class="ion-padding-top">
+              <ion-col>
+                <app-application-viewchildabusereporting [childAbuseReportingDetails]="childAbuseReportingDetails$ | async">
+                </app-application-viewchildabusereporting>
+                <ion-row>
+                  <ion-fab vertical="bottom" horizontal="end" class="fabbutton-fixed-nobutton">
+                    <ion-fab-button (click)="editChildAbuseReport()">
+                      <ion-icon name="pencil"></ion-icon>
+                    </ion-fab-button>
+                  </ion-fab>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+      </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+<!-- 
+      </ion-card>
+    </ion-col>
+    <ion-col size-md="8">
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col>
+            <app-shared-attachment [attachmentCount]="(childAbuseReportingDetails$ | async)?.attachmentCount">
+            </app-shared-attachment>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <app-application-viewchildabusereporting [childAbuseReportingDetails]="childAbuseReportingDetails$ | async">
+            </app-application-viewchildabusereporting>
+          </ion-col>
+        </ion-row>
+
+
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+
+<ion-grid fixed>
+  <ion-fab vertical="bottom" horizontal="end" class="fabbutton-fixed">
+    <ion-fab-button (click)="editChildAbuseReport()">
+      <ion-icon name="pencil"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-grid> -->
